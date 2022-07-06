@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+
+
+# https://github.com/faker-ruby/faker/blob/master/doc/default/restaurant.md
+# https://loremflickr.com/320/240/food,meal
+# https://github.com/faker-ruby/faker/blob/master/doc/default/lorem_flickr.md
+
+# https://github.com/faker-ruby/faker/blob/master/doc/default/food.md
