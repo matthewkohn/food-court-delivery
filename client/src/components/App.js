@@ -1,13 +1,14 @@
 import React from 'react'
 import Navbar from './Navbar'
-import Home from './home/Home';
+import SignIn from './home/SignIn';
+
 
 function App() {
 
   return (
     <>
       <Navbar />
-      <Home />
+      <SignIn />
 
     </>
   );
