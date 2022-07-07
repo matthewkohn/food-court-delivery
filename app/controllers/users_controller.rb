@@ -2,14 +2,22 @@ class UsersController < ApplicationController
   skip_before_action :authorize, only: :create
 
   def create
-    user = User.create!(user_params)
-    session[:user_id] = user.id
-    render json: user, status: :created
+    @user = User.new(user_params)
+    if @user.save
+      login_user
+      render json: @user, status: :created
+    end
   end
 
-  def show
-    render json: @current_user
+  def get_current_user
+    if logged_in?
+      render json: @current_user, status: :ok
+    else
+      render json: { errors: ["There is currently no user logged in."] }, status: :bad_request
+    end
   end
+
+  # def update for delivery_address
 
   private
 
