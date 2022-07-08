@@ -5,15 +5,6 @@ class ApplicationController < ActionController::API
 
   before_action :authorize
 
-  
-  def login_user
-    session[:user_id] = @user.id
-  end
-
-  def logged_in?
-    !!session[:user_id]
-  end
-
 
   private
 
