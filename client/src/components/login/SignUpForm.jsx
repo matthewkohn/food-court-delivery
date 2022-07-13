@@ -8,8 +8,8 @@ const SignUpForm = ({ onLogin }) => {
     password_confirmation: '',
     admin: false
   })
-  const [errors, setErrors] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  // const [errors, setErrors] = useState([])
+  // const [isLoading, setIsLoading] = useState(false)
   
   const handleUserInput = (e) => {
     const inputName = e.target.name
@@ -19,27 +19,27 @@ const SignUpForm = ({ onLogin }) => {
     })
   }
   
-  const handleLogin = (e) => {
-    e.preventDefault()
-    setErrors([])
-    setIsLoading(true)
-    // fetch POST to /users
-    fetch('/signup', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user)
-    })
-    .then((res) => {
-      setIsLoading(false)
-      if (res.ok) {
-        res.json().then((data) => onLogin(data))
-      } else {
-        res.json().then((err) => setErrors(err.errors))
-      }
-    })
-  }
+  // const handleLogin = (e) => {
+  //   e.preventDefault()
+  //   setErrors([])
+  //   setIsLoading(true)
+  //   // fetch POST to /users
+  //   fetch('/signup', {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(user)
+  //   })
+  //   .then((res) => {
+  //     setIsLoading(false)
+  //     if (res.ok) {
+  //       res.json().then((data) => onLogin(data))
+  //     } else {
+  //       res.json().then((err) => setErrors(err.errors))
+  //     }
+  //   })
+  // }
     
   return (
     <>
@@ -83,5 +83,5 @@ const Credential = styled(TextField)({
 })
 
 const SubmitBtn = styled(Button)({
-  color: '#DDC'
+
 })

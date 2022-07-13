@@ -14,7 +14,7 @@ function App() {
     fetch("/me")
       .then((res) => {
         if (res.ok) {
-          res.json().then((user) => setUser)
+          res.json().then((user) => setUser(user))
         }
       })
   }, [])
@@ -30,7 +30,7 @@ function App() {
         
 
       </Routes> */}
-      
+      <h1>YOU DID IT</h1>
     </Container>
   );
 }

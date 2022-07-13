@@ -45,6 +45,7 @@ const SignInContainer = styled(Box)({
   flexDirection: 'column',
   padding: '20px',
   textAlign: 'center',
+  color: '#DDC',
   width: 500,
   borderRadius: '20px',
   margin: '100px auto',
@@ -57,7 +58,6 @@ const SignInContainer = styled(Box)({
 
 const Logo = styled(Typography)({
   margin: '20px auto',
-  color: '#DDC',
   fontStyle: 'italic',
   letterSpacing: '2px'
 })

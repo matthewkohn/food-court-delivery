@@ -1,36 +1,41 @@
 import React, { useState } from 'react'
-import { Button, FormControl, styled, TextField } from '@mui/material'
+import { Box, Button, FormControl, styled, TextField } from '@mui/material'
 import Error from './Error'
 
 const LoginForm = ({ onLogin }) => {
-  const [user, setUser] = useState({
+  const [userInfo, setUserInfo] = useState({
     username: '',
     password: ''
   })
   const [errors, setErrors] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
+
+  console.log("USER: ", userInfo)
+  console.log("ERRORS: ", errors)
 
   const handleUserInput = (e) => {
     const inputName = e.target.name
-    setUser({
-      ...user, 
+    setUserInfo({
+      ...userInfo, 
       [inputName]: e.target.value
     })
   }
   
   const handleLogin = (e) => {
     e.preventDefault()
-    setIsLoading(true)
+    console.log("click")
+    // setIsLoading(true)
     // fetch POST to /sessions
-    fetch('/login', {
+    fetch("/login", {
+    // fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(userInfo),
     })
     .then((res) => {
-      setIsLoading(false)
+      // setIsLoading(false)
       if (res.ok) {
         res.json().then((data) => onLogin(data))
       } else {
@@ -40,25 +45,38 @@ const LoginForm = ({ onLogin }) => {
   }
 
   return (
-    <FormControl variant="standard" onSubmit={handleLogin}>
-      <Credential 
-        autoFocus 
-        required 
-        label="username"
-        name="username"
-        type="username"
-        value={user.username}
-        onChange={(e) => handleUserInput(e)}
-      />
-      <Credential 
-        required 
-        label="password"
-        name="password"
-        type="password"
-        value={user.password}
-        onChange={(e) => handleUserInput(e)}
-      />
-      <SubmitBtn size="large" variant="outline">Log In</SubmitBtn>
+    <FormControl variant="standard" >
+      <LoginBox 
+        component="form" 
+        onSubmit={(e) => handleLogin(e)} 
+        id="login-form"
+      >
+        <Credential 
+          autoFocus 
+          required 
+          label="username"
+          name="username"
+          type="username"
+          value={userInfo.username}
+          onChange={(e) => handleUserInput(e)}
+        />
+        <Credential 
+          required 
+          label="password"
+          name="password"
+          type="password"
+          value={userInfo.password}
+          onChange={(e) => handleUserInput(e)}
+        />
+        <SubmitBtn 
+          size="large" 
+          variant="outline" 
+          type="submit" 
+          form="login-form"
+        >
+          LOG IN
+        </SubmitBtn>
+      </LoginBox>
       {errors.map((err) => (
         <Error key={err}>{err}</Error>
       ))}
@@ -69,6 +87,10 @@ const LoginForm = ({ onLogin }) => {
 
 export default LoginForm
 
+const LoginBox = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column'
+})
 
 const Credential = styled(TextField)({
   background: '#DDC',
@@ -78,5 +100,7 @@ const Credential = styled(TextField)({
 
 const SubmitBtn = styled(Button)({
   color: '#DDC',
-  padding: '44px'
+  margin: '23px auto',
+  padding: '20px',
+  border: '1px solid #666'
 })
