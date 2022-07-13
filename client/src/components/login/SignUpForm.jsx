@@ -1,14 +1,16 @@
-import { Box, Button, styled, TextField } from '@mui/material'
 import React, { useState } from 'react'
+import { Button, styled, TextField } from '@mui/material'
 
-const SignIn = () => {
+const SignUpForm = ({ onLogin }) => {
   const [user, setUser] = useState({
     username: '',
     password: '',
-    password_confirmation: ''
+    password_confirmation: '',
+    admin: false
   })
-  console.log(user)
-
+  const [errors, setErrors] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  
   const handleUserInput = (e) => {
     const inputName = e.target.name
     setUser({
@@ -16,11 +18,31 @@ const SignIn = () => {
       [inputName]: e.target.value
     })
   }
-
+  
+  const handleLogin = (e) => {
+    e.preventDefault()
+    setErrors([])
+    setIsLoading(true)
+    // fetch POST to /users
+    fetch('/signup', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user)
+    })
+    .then((res) => {
+      setIsLoading(false)
+      if (res.ok) {
+        res.json().then((data) => onLogin(data))
+      } else {
+        res.json().then((err) => setErrors(err.errors))
+      }
+    })
+  }
+    
   return (
-    <SignInContainer component="form">
-
-      <h1>Sign Up to Order</h1>
+    <>
       <Credential 
         autoFocus 
         required 
@@ -28,7 +50,7 @@ const SignIn = () => {
         name="username"
         type="username"
         value={user.username}
-        onChange={handleUserInput}
+        onChange={(e) => handleUserInput(e)}
       />
       <Credential 
         required 
@@ -36,7 +58,7 @@ const SignIn = () => {
         name="password"
         type="password"
         value={user.password}
-        onChange={handleUserInput}
+        onChange={(e) => handleUserInput(e)}
       />
       <Credential 
         required 
@@ -44,32 +66,15 @@ const SignIn = () => {
         name="password_confirmation"
         type="password"
         value={user.password_confirmation}
-        onChange={handleUserInput}
+        onChange={(e) => handleUserInput(e)}
       />
       <SubmitBtn size="large" variant="solid">Submit</SubmitBtn>
-      
-
-    </SignInContainer>
+    </>
   )
 }
 
-export default SignIn
+export default SignUpForm
 
-const SignInContainer = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '20px',
-  textAlign: 'center',
-  width: 500,
-  height: 500,
-  borderRadius: '20px',
-  margin: '150px auto',
-  backgroundColor: 'darkgreen',
-  '&:hover': {
-    backgroundColor: 'green',
-    opacity: [0.9, 0.8, 0.7]
-  }
-})
 
 const Credential = styled(TextField)({
   background: '#DDC',
