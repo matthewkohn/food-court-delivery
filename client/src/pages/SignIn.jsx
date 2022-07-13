@@ -9,28 +9,27 @@ const SignIn = ({ onLogin }) => {
 
   return (
     <SignInContainer component="section" >
-
-      <h1>Sign Up to Order</h1>
+      <Logo variant="h3">Food Court Delivery</Logo>
       {showLogin ? (
         <>
+        <Title variant="h5">Login to Order</Title>
           <LoginForm onLogin={onLogin} />
-          <hr />
           <Typography variant="caption">
             Don't have an account? &nbsp;
-            <Button color="secondary" onClick={() => setShowLogin(false)}>
+            <ToggleBtn color="secondary" onClick={() => setShowLogin(false)}>
               Sign Up
-            </Button>
+            </ToggleBtn>
           </Typography>
         </>
       ) : (
         <>
+          <Title variant="h5">Sign Up for Free</Title>
           <SignUpForm onLogin={onLogin} />
-          <hr />
           <Typography variant="caption">
             Already have an account? &nbsp;
-            <Button color="secondary" onClick={() => setShowLogin(true)}>
+            <ToggleBtn color="secondary" onClick={() => setShowLogin(true)}>
               Log In
-            </Button>
+            </ToggleBtn>
           </Typography>
         </>
       )}
@@ -47,9 +46,8 @@ const SignInContainer = styled(Box)({
   padding: '20px',
   textAlign: 'center',
   width: 500,
-  height: 500,
   borderRadius: '20px',
-  margin: '150px auto',
+  margin: '100px auto',
   backgroundColor: 'darkgreen',
   '&:hover': {
     backgroundColor: 'green',
@@ -57,3 +55,17 @@ const SignInContainer = styled(Box)({
   }
 })
 
+const Logo = styled(Typography)({
+  margin: '20px auto',
+  color: '#DDC',
+  fontStyle: 'italic',
+  letterSpacing: '2px'
+})
+
+const Title = styled(Typography)({
+  margin: '20px 0 30px'
+})
+
+const ToggleBtn = styled(Button)({
+
+})

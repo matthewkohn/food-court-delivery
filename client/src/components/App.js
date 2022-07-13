@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from './Navbar'
+// import Navbar from './Navbar'
 import SignIn from '../pages/SignIn'
 
 // import { Routes, Route } from 'react-router-dom'
@@ -24,7 +24,7 @@ function App() {
 
   return (
     <Container>
-      <Navbar />
+      {/* <Navbar /> */}
       {/* <Routes>
         <Route path='/' element={ <SignIn onLogin={setUser} /> } />
         

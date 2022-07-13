@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Button, styled, TextField } from '@mui/material'
+import { Button, FormControl, styled, TextField } from '@mui/material'
+import Error from './Error'
 
 const LoginForm = ({ onLogin }) => {
   const [user, setUser] = useState({
@@ -39,7 +40,7 @@ const LoginForm = ({ onLogin }) => {
   }
 
   return (
-    <>
+    <FormControl variant="standard" onSubmit={handleLogin}>
       <Credential 
         autoFocus 
         required 
@@ -57,10 +58,12 @@ const LoginForm = ({ onLogin }) => {
         value={user.password}
         onChange={(e) => handleUserInput(e)}
       />
-      <SubmitBtn size="large" variant="solid">Submit</SubmitBtn>
-      
+      <SubmitBtn size="large" variant="outline">Log In</SubmitBtn>
+      {errors.map((err) => (
+        <Error key={err}>{err}</Error>
+      ))}
 
-    </>
+    </FormControl>
   )
 }
 
@@ -70,9 +73,10 @@ export default LoginForm
 const Credential = styled(TextField)({
   background: '#DDC',
   borderRadius: '5px',
-  margin: '10px auto 50px'
+  margin: '10px auto'
 })
 
 const SubmitBtn = styled(Button)({
-
+  color: '#DDC',
+  padding: '44px'
 })

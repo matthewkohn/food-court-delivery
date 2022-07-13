@@ -68,7 +68,7 @@ const SignUpForm = ({ onLogin }) => {
         value={user.password_confirmation}
         onChange={(e) => handleUserInput(e)}
       />
-      <SubmitBtn size="large" variant="solid">Submit</SubmitBtn>
+      <SubmitBtn size="large" variant="solid">Sign Up</SubmitBtn>
     </>
   )
 }
@@ -79,9 +79,9 @@ export default SignUpForm
 const Credential = styled(TextField)({
   background: '#DDC',
   borderRadius: '5px',
-  margin: '10px auto 50px'
+  margin: '10px auto'
 })
 
 const SubmitBtn = styled(Button)({
-
+  color: '#DDC'
 })
