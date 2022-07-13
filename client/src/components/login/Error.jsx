@@ -16,7 +16,7 @@ export default Error
 const ErrorBox = styled(Box)({
   color: 'red',
   backgroundColor: 'lightblue',
-  margin: 'auto',
+  margin: '2px auto',
   padding: '5px 15px',
   borderRadius: '10px',
   fontStyle: 'italic'

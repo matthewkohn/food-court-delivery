@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
-import { Box, Button, FormControl, styled, TextField } from '@mui/material'
 import Error from './Error'
+import { Box, Button, FormControl, styled, TextField } from '@mui/material'
+import LoginIcon from '@mui/icons-material/Login'
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = ({ hideSignUp, onLogin }) => {
   const [userInfo, setUserInfo] = useState({
     username: '',
-    password: ''
+    password: '',
+    password_confirmation: '',
+    admin: false
   })
   const [errors, setErrors] = useState([])
-  // const [isLoading, setIsLoading] = useState(false)
-
-  console.log("USER: ", userInfo)
-  console.log("ERRORS: ", errors)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleUserInput = (e) => {
     const inputName = e.target.name
@@ -23,19 +24,19 @@ const LoginForm = ({ onLogin }) => {
   
   const handleLogin = (e) => {
     e.preventDefault()
-    console.log("click")
-    // setIsLoading(true)
-    // fetch POST to /sessions
-    fetch("/login", {
-    // fetch("http://localhost:3000/login", {
+    setIsLoading(true)
+    let url = ""
+    hideSignUp ? url = "/login" : url = "/signup"
+    fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(userInfo),
     })
     .then((res) => {
-      // setIsLoading(false)
+      setIsLoading(false)
       if (res.ok) {
         res.json().then((data) => onLogin(data))
       } else {
@@ -68,15 +69,40 @@ const LoginForm = ({ onLogin }) => {
           value={userInfo.password}
           onChange={(e) => handleUserInput(e)}
         />
-        <SubmitBtn 
-          size="large" 
-          variant="outline" 
-          type="submit" 
-          form="login-form"
-        >
-          LOG IN
-        </SubmitBtn>
+
+        { hideSignUp ?
+          <SubmitBtn 
+            size="large" 
+            variant="outline" 
+            type="submit" 
+            form="login-form"
+            endIcon={<LoginIcon />}
+          >
+            { isLoading ? "LOADING..." : "LOG IN" }
+          </SubmitBtn>
+        :
+          <>
+            <Credential 
+              required 
+              label="confirm password"
+              name="password_confirmation"
+              type="password"
+              value={userInfo.password_confirmation}
+              onChange={(e) => handleUserInput(e)}
+            />
+            <SubmitBtn 
+              size="large" 
+              variant="outline" 
+              type="submit" 
+              form="login-form"
+              endIcon={<AppRegistrationIcon />}
+            >
+                { isLoading ? "Loading..." : "Let's get Started!" }
+            </SubmitBtn>
+          </>
+        }
       </LoginBox>
+
       {errors.map((err) => (
         <Error key={err}>{err}</Error>
       ))}
@@ -87,6 +113,7 @@ const LoginForm = ({ onLogin }) => {
 
 export default LoginForm
 
+
 const LoginBox = styled(Box)({
   display: 'flex',
   flexDirection: 'column'
@@ -95,12 +122,16 @@ const LoginBox = styled(Box)({
 const Credential = styled(TextField)({
   background: '#DDC',
   borderRadius: '5px',
-  margin: '10px auto'
+  margin: '0 auto 15px'
 })
 
 const SubmitBtn = styled(Button)({
   color: '#DDC',
   margin: '23px auto',
   padding: '20px',
-  border: '1px solid #666'
+  border: '1px solid #666',
+  borderRadius: '15px',
+  '&:hover': {
+    backgroundColor: 'blue'
+  }
 })

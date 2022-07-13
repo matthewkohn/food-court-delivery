@@ -1,38 +1,37 @@
 import React, { useState } from 'react'
+import LoginForm from '../components/login/LoginForm'
 import { Box, Button, styled, Typography } from '@mui/material'
-import LoginForm from '../components/login/LoginForm';
-import SignUpForm from '../components/login/SignUpForm';
 
 const SignIn = ({ onLogin }) => {
-  const [showLogin, setShowLogin] = useState(true);
-
+  const [hideSignUp, setHideSignUp] = useState(true);
 
   return (
     <SignInContainer component="section" >
       <Logo variant="h3">Food Court Delivery</Logo>
-      {showLogin ? (
-        <>
+
+      { hideSignUp ? 
         <Title variant="h5">Login to Order</Title>
-          <LoginForm onLogin={onLogin} />
-          <Typography variant="caption">
-            Don't have an account? &nbsp;
-            <ToggleBtn color="secondary" onClick={() => setShowLogin(false)}>
-              Sign Up
-            </ToggleBtn>
-          </Typography>
-        </>
-      ) : (
-        <>
-          <Title variant="h5">Sign Up for Free</Title>
-          <SignUpForm onLogin={onLogin} />
-          <Typography variant="caption">
-            Already have an account? &nbsp;
-            <ToggleBtn color="secondary" onClick={() => setShowLogin(true)}>
-              Log In
-            </ToggleBtn>
-          </Typography>
-        </>
-      )}
+        :
+        <Title variant="h5">Sign Up for Free</Title>
+      }
+
+      <LoginForm onLogin={onLogin} hideSignUp={hideSignUp} />
+
+      { hideSignUp ?
+        <Typography variant="caption">
+          Don't have an account? &nbsp;
+          <ToggleBtn onClick={() => setHideSignUp(false)}>
+            Sign Up
+          </ToggleBtn>
+        </Typography>
+        :
+        <Typography variant="caption">
+          Already have an account? &nbsp;
+          <ToggleBtn onClick={() => setHideSignUp(true)}>
+            Log In
+          </ToggleBtn>
+        </Typography>
+      }    
 
     </SignInContainer>
   )
@@ -40,13 +39,16 @@ const SignIn = ({ onLogin }) => {
 
 export default SignIn
 
+
 const SignInContainer = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'space-between',
   padding: '20px',
   textAlign: 'center',
   color: '#DDC',
   width: 500,
+  minHeight: 585,
   borderRadius: '20px',
   margin: '100px auto',
   backgroundColor: 'darkgreen',
@@ -67,5 +69,8 @@ const Title = styled(Typography)({
 })
 
 const ToggleBtn = styled(Button)({
-
+  color: 'blue',
+  '&:hover': {
+    backgroundColor: 'lightblue'
+  }
 })
