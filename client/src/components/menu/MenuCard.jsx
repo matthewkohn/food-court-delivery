@@ -1,0 +1,27 @@
+import React from 'react'
+import { Card, styled, Typography } from '@mui/material'
+
+const MenuCard = ({ menu }) => {
+
+  return (
+    <RestaurantCard>
+      <Typography variant="h5">{menu.name}</Typography>
+    </RestaurantCard>
+    
+  )
+}
+
+export default MenuCard
+
+const RestaurantCard = styled(Card)({
+  background: 'forestgreen',
+  color: '#DDC',
+  margin: '0 auto 20px',
+  padding: '30px',
+  borderRadius: '50%',
+  width: '200px',
+  textAlign: 'center',
+  display: 'inherit',
+  justifyContent: 'center',
+  alignItems: 'center'
+})

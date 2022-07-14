@@ -8,7 +8,7 @@
 # config.middleware.use "Rack::Cors" do
 Rails.application.config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
   allow do
-    origins '*'
+    origins 'localhost:3000'
 
     resource '*',
       headers: :any,

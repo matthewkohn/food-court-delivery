@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import SignIn from '../pages/SignIn'
 
-// import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
-import { Container } from '@mui/material'
+import { Container, styled } from '@mui/material'
+import Menus from '../pages/Menus'
 
 
 function App() {
@@ -25,16 +26,21 @@ function App() {
 
 
   return (
-    <Container>
+    <AppContainer>
       <Navbar setUser={setUser} />
-      {/* <Routes>
-        <Route path='/' element={ <SignIn onLogin={setUser} /> } />
+      <Routes>
+        <Route path='/' element={ <Menus /> } />
         
 
-      </Routes> */}
-      <h1>YOU DID IT</h1>
-    </Container>
+      </Routes>
+    </AppContainer>
   );
 }
 
 export default App;
+
+
+const AppContainer = styled(Container)({
+  margin: 0,
+  width: '100vw'
+})
