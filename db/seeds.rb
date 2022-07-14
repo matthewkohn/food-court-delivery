@@ -7,7 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+User.create(username: "Matt", password: "happy", admin: true)
+User.create(username: "Logan", password: "running")
 
+puts "Done seeding!"
 
 # https://github.com/faker-ruby/faker/blob/master/doc/default/restaurant.md
 # https://loremflickr.com/320/240/food,meal
