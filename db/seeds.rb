@@ -10,6 +10,13 @@
 User.create(username: "Matt", password: "happy", admin: true)
 User.create(username: "Logan", password: "running")
 
+ice_cream = Menu.create(name: "99 Flavors Ice Cream Shop")
+mexican = Menu.create(name: "Senora Marta's")
+deli = Menu.create(name: "Hoagies 'n Grinders")
+chinese = Menu.create(name: "Mandarin Buffet")
+chocolate = Menu.create(name: "Chocolate Lover's Bakery")
+healthy = Menu.create(name: "Green Goddess Cuisine")
+
 puts "Done seeding!"
 
 # https://github.com/faker-ruby/faker/blob/master/doc/default/restaurant.md
