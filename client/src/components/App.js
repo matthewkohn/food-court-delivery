@@ -5,9 +5,7 @@ import Menus from '../pages/Menus'
 import MenuItems from '../pages/MenuItems'
 import Item from '../pages/Item'
 import Cart from '../pages/Cart'
-
 import { Routes, Route } from 'react-router-dom'
-
 import { Container, styled } from '@mui/material'
 
 

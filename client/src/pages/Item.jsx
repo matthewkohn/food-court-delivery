@@ -16,7 +16,6 @@ const Item = () => {
       setMenuName(location.state[1])
     }
   }, [location])
-  console.log(location.state)
 
   const handleQuantity = (e) => {
     const qty = e.target.value
@@ -27,22 +26,22 @@ const Item = () => {
 
   return (
     <ItemContainer>
-      <Title variant="h2">{item.name}</Title>
+      <Title variant='h2'>{item.name}</Title>
       <ItemBody>
         <Section>
-          <Description variant="h6">
+          <Description variant='h6'>
             {item.description}
           </Description>
           <ButtonGroup>
             <ActionBtn
               onClick={ () => navigate(-1) }
-              variant="outlined"
+              variant='outlined'
             >
               Back to {menuName}
             </ActionBtn>
             <ActionBtn
               onClick={ () => navigate('/') }
-              variant="outlined"
+              variant='outlined'
             >
               Browse Other Menus
             </ActionBtn>
@@ -50,14 +49,14 @@ const Item = () => {
         </Section>
 
         <Section>
-          <Price variant="h4">${item.price}</Price>
+          <Price variant='h4'>${item.price}</Price>
           <FormControlLabel
-            label="Quantity: "
+            label='Quantity: '
             labelPlacement='start'
             control={
               <Qty
-                type="number"
-                step="1"
+                type='number'
+                step='1'
                 disableUnderline
                 value={quantity}
                 onChange={(e) => handleQuantity(e)}
@@ -66,7 +65,7 @@ const Item = () => {
           />
           <OrderBtn
             onClick={() => console.log("Click!!")}
-            variant="contained"
+            variant='contained'
           >
             Add To Cart
           </OrderBtn>
@@ -101,11 +100,11 @@ const ItemBody = styled(Box)({
 
 const Description = styled(Typography)({
   padding: '0 50px 0 0',
-  minWidth: '50%',
+  minWidth: '50%'
 })
 
 const Price = styled(Typography)({
-  margin: '0 auto',
+  margin: '0 auto'
 })
 
 const Section = styled(FormGroup)({

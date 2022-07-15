@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Button, Card, Container, styled, Typography } from '@mui/material'
-// import { Container, styled } from '@mui/material'
-
-// import { useLocation } from 'react-router-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const MenuItems = () => {
@@ -28,7 +25,7 @@ const MenuItems = () => {
       <ItemCard 
         key={item.id} 
         onClick={ () => navigate(`/item/${item.name}`, { state: [item, menuName] }) }>
-        <Detail variant="h5">{item.name}</Detail>
+        <Detail variant='h5'>{item.name}</Detail>
         <Detail>${item.price}</Detail>
         <Detail>{item.description}</Detail>
       </ItemCard>
@@ -39,9 +36,15 @@ const MenuItems = () => {
   return (
     <>
       <Header>
-        <Title variant="h3">{ menuName } Menu</Title>
+        <Title variant='h3'>{ menuName } Menu</Title>
         <Typography>Click an item to add to your cart, or 
-          <Button variant="text" size="large" onClick={() => navigate('/')}>Go Back to Menus</Button>
+          <Button 
+            variant='text' 
+            size='large' 
+            onClick={() => navigate('/')}
+          >
+            Go Back to Menus
+          </Button>
         </Typography>
       </Header>
       <ItemsContainer>
@@ -57,8 +60,7 @@ export default MenuItems
 
 const Header = styled(Box)({
   margin: '100px auto 0',
-  textAlign: 'center',
-
+  textAlign: 'center'
 })
 
 const Title = styled(Typography)({

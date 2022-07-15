@@ -15,7 +15,7 @@ const Menus = () => {
 
   return (
     <MenuContainer>
-      <Typography variant="h4">Choose a Menu</Typography>
+      <Typography variant='h4'>Choose a Menu</Typography>
       <MenuBox>
         {menus.map((menu) => ( <MenuCard menu={menu} key={menu.id} /> ))}
       </MenuBox>
@@ -40,4 +40,3 @@ const MenuBox = styled(Box)({
   margin: '20px auto',
   width: '100%'
 })
-

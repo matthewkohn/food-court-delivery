@@ -21,7 +21,7 @@ const Navbar = ({ logout }) => {
 
   return (
     <Banner>
-      <Header variant="h3" component="div">Foodcourt Delivery</Header>
+      <Header variant='h3' component='div'>Foodcourt Delivery</Header>
     
       <ButtonWrapper
         size='large'
@@ -49,6 +49,7 @@ const Navbar = ({ logout }) => {
 
 export default Navbar
 
+
 const Banner = styled(AppBar)({
   display: 'flex',
   flexDirection: 'row',
@@ -65,12 +66,7 @@ const ButtonWrapper = styled(IconButton)({
   color: '#DDC',
   margin: '10px',
   '&:hover': {
-    // backgroundColor: 'darkgreen',
     opacity: [0.9, 0.8, 0.7],
     color: '#F16500'
   }
-
 })
-
-// const Logout = styled(LogoutIcon)({
-// })

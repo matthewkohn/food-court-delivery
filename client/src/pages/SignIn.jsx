@@ -6,26 +6,26 @@ const SignIn = ({ onLogin }) => {
   const [hideSignUp, setHideSignUp] = useState(true);
 
   return (
-    <SignInContainer component="section" >
-      <Logo variant="h3">Food Court Delivery</Logo>
+    <SignInContainer component='section' >
+      <Logo variant='h3'>Food Court Delivery</Logo>
 
       { hideSignUp ? 
-        <Title variant="h5">Login to Order</Title>
+        <Title variant='h5'>Login to Order</Title>
         :
-        <Title variant="h5">Sign Up for Free</Title>
+        <Title variant='h5'>Sign Up for Free</Title>
       }
 
       <LoginForm onLogin={onLogin} hideSignUp={hideSignUp} />
 
       { hideSignUp ?
-        <Typography variant="caption">
+        <Typography variant='caption'>
           Don't have an account? &nbsp;
           <ToggleBtn onClick={() => setHideSignUp(false)}>
             Sign Up
           </ToggleBtn>
         </Typography>
         :
-        <Typography variant="caption">
+        <Typography variant='caption'>
           Already have an account? &nbsp;
           <ToggleBtn onClick={() => setHideSignUp(true)}>
             Log In
