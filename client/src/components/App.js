@@ -31,7 +31,7 @@ function App() {
       <Navbar setUser={setUser} />
       <Routes>
         <Route path='/' element={ <Menus /> } />
-        <Route path='/menu/:id' element={ <MenuItems /> } />
+        <Route path='/menus/:id' element={ <MenuItems /> } />
 
       </Routes>
     </AppContainer>

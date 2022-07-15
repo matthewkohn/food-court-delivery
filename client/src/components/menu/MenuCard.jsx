@@ -8,7 +8,7 @@ const MenuCard = ({ menu }) => {
   return (
     <RestaurantCard
       raised
-      onClick={ () => navigate(`/menu/${menu.id}`) }
+      onClick={ () => navigate(`/menus/${menu.id}`) }
     >
       <Typography variant="h5">{menu.name}</Typography>
     </RestaurantCard>
