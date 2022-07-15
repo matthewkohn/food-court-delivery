@@ -5,16 +5,15 @@ import { useLocation } from 'react-router-dom'
 const MenuItems = () => {
   const [items, setItems] = useState([])
   const location = useLocation()
+  const url = location.pathname
 
   console.log(location)
   useEffect(() => {
-    const url = location.pathname
     console.log("URL: ", url)
     fetch(url)
       .then((res) => res.json())
       .then(setItems)
-
-  }, [])
+  }, [url])
 
   console.log("ITEMS: ", items)
 
