@@ -1,10 +1,11 @@
 import React from 'react'
 import { AppBar, IconButton, styled, Typography } from '@mui/material'
-import LogoutIcon from '@mui/icons-material/Logout';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
+import LogoutIcon from '@mui/icons-material/Logout'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { useNavigate } from 'react-router-dom'
 
-const Navbar = ({ setUser }) => {
+const Navbar = ({ logout }) => {
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -13,7 +14,7 @@ const Navbar = ({ setUser }) => {
     })
       .then((res) => {
         if (res.ok) {
-          setUser(null)
+          logout(null)
         }
       })
   }
@@ -28,6 +29,14 @@ const Navbar = ({ setUser }) => {
       >
         <MenuBookIcon />
       </ButtonWrapper>
+
+      <ButtonWrapper
+        size='large'
+        onClick={ () => navigate('/cart') }
+      >
+        <ShoppingCartIcon />
+      </ButtonWrapper>
+
       <ButtonWrapper
           size='large'
           onClick={ () => handleLogout() }

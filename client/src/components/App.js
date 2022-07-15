@@ -3,6 +3,8 @@ import Navbar from './Navbar'
 import SignIn from '../pages/SignIn'
 import Menus from '../pages/Menus'
 import MenuItems from '../pages/MenuItems'
+import Item from '../pages/Item'
+import Cart from '../pages/Cart'
 
 import { Routes, Route } from 'react-router-dom'
 
@@ -28,11 +30,12 @@ function App() {
 
   return (
     <AppContainer>
-      <Navbar setUser={setUser} />
+      <Navbar logout={setUser} />
       <Routes>
         <Route path='/' element={ <Menus /> } />
         <Route path='/menus/:id' element={ <MenuItems /> } />
-
+        <Route path='/item/:id' element={ <Item />} />
+        <Route path='/cart' element={ <Cart /> } />
       </Routes>
     </AppContainer>
   );
