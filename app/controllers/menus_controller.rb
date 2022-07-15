@@ -5,5 +5,10 @@ class MenusController < ApplicationController
     render json: menus
   end
 
+  def show
+    full_menu = Menu.find_by(id: params[:id])
+    render json: full_menu
+  end
+
 
 end

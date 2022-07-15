@@ -6,31 +6,31 @@ puts "....."
 
 require 'faker'
 
-# User.create(username: "Matt", password: "happy", admin: true)
-# User.create(username: "Logan", password: "running")
+User.create(username: "Matt", password: "happy", admin: true)
+User.create(username: "Logan", password: "running")
 
-# ice_cream = Menu.create(name: "99 Flavors Ice Cream Shop")
-# mexican = Menu.create(name: "Senora Marta's")
-# deli = Menu.create(name: "Hoagies 'n Grinders")
-# chinese = Menu.create(name: "Mandarin Buffet")
-# chocolate = Menu.create(name: "Chocolate Lover's Bakery")
-# healthy = Menu.create(name: "Green Goddess Cuisine")
+ice_cream = Menu.create(name: "99 Flavors Ice Cream Shop")
+mexican = Menu.create(name: "Senora Marta's")
+deli = Menu.create(name: "Hoagies 'n Grinders")
+chinese = Menu.create(name: "Mandarin Buffet")
+chocolate = Menu.create(name: "Chocolate Lover's Bakery")
+healthy = Menu.create(name: "Green Goddess Cuisine")
 
-ice_cream = Menu.find_by(id: 1)
-mexican = Menu.find_by(id: 2)
-deli = Menu.find_by(id: 3)
-chinese = Menu.find_by(id: 4)
-chocolate = Menu.find_by(id: 5)
-healthy = Menu.find_by(id: 6)
+# ice_cream = Menu.find_by(id: 1)
+# mexican = Menu.find_by(id: 2)
+# deli = Menu.find_by(id: 3)
+# chinese = Menu.find_by(id: 4)
+# chocolate = Menu.find_by(id: 5)
+# healthy = Menu.find_by(id: 6)
 
-# 20.times do
-#   Item.create(
-#     name: Faker::Dessert.flavor,
-#     description: Faker::Adjective.positive,
-#     price: 3.99,
-#     menu: ice_cream
-#   )
-# end
+20.times do
+  Item.create(
+    name: Faker::Dessert.flavor,
+    description: Faker::Adjective.positive,
+    price: 3.99,
+    menu: ice_cream
+  )
+end
 
 12.times do
   Item.create(
@@ -41,7 +41,7 @@ healthy = Menu.find_by(id: 6)
   )
 end
 
-14.times do
+8.times do
   Item.create(
     name: Faker::Food.dish,
     description: Faker::Food.description,
@@ -50,7 +50,7 @@ end
   )
 end
 
-31.times do
+11.times do
   Item.create(
     name: Faker::Food.dish,
     description: Faker::Food.description,
@@ -62,7 +62,7 @@ end
 9.times do
   Item.create(
     name: Faker::Dessert.variety,
-    description: "Served with #{Faker::Adjective.positive}",
+    description: "Served with #{Faker::Dessert.topping}",
     price: rand(4.90..20.01),
     menu: chocolate
   )
