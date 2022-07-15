@@ -28,5 +28,9 @@ const RestaurantCard = styled(Card)({
   textAlign: 'center',
   display: 'inherit',
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  '&:hover': {
+    backgroundColor: 'blue',
+    color: '#DDC'
+  }
 })

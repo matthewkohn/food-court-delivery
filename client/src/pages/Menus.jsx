@@ -29,7 +29,8 @@ export default Menus
 
 const MenuContainer = styled(Container)({
   padding: '80px',
-  margin: '5px auto'
+  margin: '5px auto',
+  textAlign: 'center'
 })
 
 const MenuBox = styled(Box)({
