@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import SignIn from '../pages/SignIn'
+import Menus from '../pages/Menus'
+import MenuItems from '../pages/MenuItems'
 
 import { Routes, Route } from 'react-router-dom'
 
 import { Container, styled } from '@mui/material'
-import Menus from '../pages/Menus'
 
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
       <Navbar setUser={setUser} />
       <Routes>
         <Route path='/' element={ <Menus /> } />
-        
+        <Route path='/menu/:id' element={ <MenuItems /> } />
 
       </Routes>
     </AppContainer>

@@ -17,14 +17,7 @@ const Menus = () => {
     <MenuContainer>
       <Typography variant="h4">Choose a Menu</Typography>
       <MenuBox>
-        {menus.map((menu) => (
-          <MenuCard
-            raised
-            menu={menu}
-            key={menu.id}
-            onClick={ () => console.log("Menu ID: ", menu.id) }
-          />
-        ))}
+        {menus.map((menu) => ( <MenuCard menu={menu} key={menu.id} /> ))}
       </MenuBox>
       <OrderHistory />
     </MenuContainer>

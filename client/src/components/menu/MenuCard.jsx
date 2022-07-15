@@ -1,10 +1,15 @@
 import React from 'react'
 import { Card, styled, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const MenuCard = ({ menu }) => {
+  const navigate = useNavigate()
 
   return (
-    <RestaurantCard>
+    <RestaurantCard
+      raised
+      onClick={ () => navigate(`/menu/${menu.id}`) }
+    >
       <Typography variant="h5">{menu.name}</Typography>
     </RestaurantCard>
     

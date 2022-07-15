@@ -7,7 +7,7 @@ class MenusController < ApplicationController
 
   def show
     full_menu = Menu.find_by(id: params[:id])
-    render json: full_menu
+    render json: full_menu, serializer: MenuWithItemsSerializer
   end
 
 
