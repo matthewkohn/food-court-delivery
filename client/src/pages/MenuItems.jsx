@@ -25,7 +25,9 @@ const MenuItems = () => {
 
   const itemsList = items.map(item => {
     return (
-      <ItemCard key={item.id} onClick={ () => navigate(`/item/${item.name}`, { state: item }) }>
+      <ItemCard 
+        key={item.id} 
+        onClick={ () => navigate(`/item/${item.name}`, { state: [item, menuName] }) }>
         <Detail variant="h5">{item.name}</Detail>
         <Detail>${item.price}</Detail>
         <Detail>{item.description}</Detail>
