@@ -1,10 +1,13 @@
 import React from 'react'
 import { AppBar, IconButton, styled, Typography } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = ({ setUser }) => {
+  const navigate = useNavigate()
 
-  const handleLogout = (e) => {
+  const handleLogout = () => {
     fetch("/logout", {
       method: "DELETE"
     })
@@ -19,12 +22,18 @@ const Navbar = ({ setUser }) => {
     <Banner>
       <Header variant="h3" component="div">Foodcourt Delivery</Header>
     
-      <IconButton
-          size='large'
-          onClick={(e) => handleLogout(e)}
+      <ButtonWrapper
+        size='large'
+        onClick={ () => navigate('/')}
       >
-        <Logout />
-      </IconButton>
+        <MenuBookIcon />
+      </ButtonWrapper>
+      <ButtonWrapper
+          size='large'
+          onClick={ () => handleLogout() }
+      >
+        <LogoutIcon />
+      </ButtonWrapper>
     </Banner>
   )
 }
@@ -43,7 +52,7 @@ const Header = styled(Typography)({
   flexGrow: 1
 })
 
-const Logout = styled(LogoutIcon)({
+const ButtonWrapper = styled(IconButton)({
   color: '#DDC',
   margin: '10px',
   '&:hover': {
@@ -51,4 +60,8 @@ const Logout = styled(LogoutIcon)({
     opacity: [0.9, 0.8, 0.7],
     color: '#F16500'
   }
+
 })
+
+// const Logout = styled(LogoutIcon)({
+// })
