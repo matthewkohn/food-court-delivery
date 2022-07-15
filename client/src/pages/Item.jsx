@@ -1,4 +1,6 @@
+// import React, { useContext, useEffect, useState } from 'react'
 import React, { useEffect, useState } from 'react'
+// import { CartContext } from '../components/context/CartContext'
 import { Box, Button, ButtonGroup, Container, FormControlLabel, FormGroup, Input, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -7,6 +9,7 @@ const Item = () => {
   const [item, setItem] = useState({})
   const [menuName, setMenuName] = useState("")
   const [quantity, setQuantity] = useState(1)
+  // const [cart, setCart] = useContext(CartContext)
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -23,6 +26,16 @@ const Item = () => {
       setQuantity(e.target.value)
     }
   }
+
+  // const handleAddToCart = () => {
+  //   console.log("CliCK")
+  //   const contents = {
+
+  //   }
+  // }
+
+
+  // console.log("CART: ", cart)
 
   return (
     <ItemContainer>
@@ -64,7 +77,8 @@ const Item = () => {
             }
           />
           <OrderBtn
-            onClick={() => console.log("Click!!")}
+            // onClick={() => handleAddToCart()}
+            onClick={() => console.log("click")}
             variant='contained'
           >
             Add To Cart
