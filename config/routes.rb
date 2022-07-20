@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
  
-  resources :orders, only: [:create]
+  resources :orders, only: [:index, :create]
   resources :items, only: [:index]
   resources :menus, only: [:index, :show]
   

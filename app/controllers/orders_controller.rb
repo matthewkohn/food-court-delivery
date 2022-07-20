@@ -1,5 +1,9 @@
 class OrdersController < ApplicationController
 
+  def index
+    render json: Order.all.where(user_id: session[:user_id])
+  end
+
   def create
     @order = Order.new(order_params)
     if @order.valid?
