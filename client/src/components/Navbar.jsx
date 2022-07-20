@@ -13,10 +13,9 @@ const Navbar = ({ logout }) => {
       method: "DELETE"
     })
       .then((res) => {
-        if (res.ok) {
-          logout(null)
-        }
+        if (res.ok) { logout(null) }
       })
+      .then(navigate('/'))
   }
 
   return (
