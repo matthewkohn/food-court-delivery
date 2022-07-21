@@ -8,7 +8,6 @@ import Cart from '../pages/Cart'
 import { Routes, Route } from 'react-router-dom'
 import { Container, styled } from '@mui/material'
 
-
 function App() {
   const [user, setUser] = useState(null)
   const [cart, setCart] = useState([])
@@ -25,8 +24,6 @@ function App() {
   }, [])
 
   if (!user) return <SignIn onLogin={setUser} />
-
-  console.log("USER FROM APP: ", user)
 
   return (
     <AppContainer>

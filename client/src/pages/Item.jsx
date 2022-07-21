@@ -34,11 +34,11 @@ const Item = ({ cart, onCartChange }) => {
   const handleQuantity = (e) => {
     const qty = parseFloat(e.target.value)
     if (qty > 0) {
-      const newSubtotal = item.price * qty
+      const newSubtotal = (item.price * qty).toLocaleString("en-US", {maximumFractionDigits:2})
       setCartItem({
         ...cartItem,
         quantity: qty,
-        subtotal: newSubtotal
+        subtotal: parseFloat(newSubtotal)
       })
     }
   }
@@ -47,11 +47,6 @@ const Item = ({ cart, onCartChange }) => {
     onCartChange( [ ...cart, cartItem ] )
     setIsAdded(true)
   }
-
-
-  console.log("ITEM: ", item)
-  console.log("cartItem: ", cartItem)
-  console.log("CART: ", cart)
 
   return (
     <ItemContainer>

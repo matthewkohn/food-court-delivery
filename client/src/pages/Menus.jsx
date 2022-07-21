@@ -12,7 +12,6 @@ const Menus = ({ currentUser }) => {
       .then(setMenus)
 
   }, [])
-  console.log("MENUS: ", menus)
 
   return (
     <MenuContainer>
