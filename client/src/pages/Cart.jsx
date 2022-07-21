@@ -7,8 +7,19 @@ const Cart = ({ cart, onCartChange, currentUser }) => {
   console.log("currentUser: ", currentUser)
   console.log("CART: ", cart)
 
+  
+  const handleDelete = (id) => {
+    const updatedCart = cart.filter((i) => i.item_id !== id)
+    onCartChange(updatedCart)
+  }
+
   const listOfCartItems = cart.map((item) => (
-    <CartItem key={item.id} cartItem={item} onCartUpdate={onCartChange} />
+    <CartItem 
+      key={item.id} 
+      cartItem={item} 
+      onCartUpdate={onCartChange} 
+      onDeleteItem={handleDelete}  
+    />
   ))
 
   return (
@@ -41,4 +52,5 @@ const CartList = styled(List)({
 
 const Title = styled(Typography)({
   textAlign: 'center',
+  margin: '15px 0 0'
 })
