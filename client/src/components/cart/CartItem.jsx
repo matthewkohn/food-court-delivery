@@ -2,7 +2,7 @@ import React from 'react'
 import { Paper, IconButton, ListItem, styled, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const CartItem = ({ cartItem, onCartUpdate, onDeleteItem }) => {
+const CartItem = ({ cartItem, onDeleteItem }) => {
 
 
 

@@ -88,6 +88,7 @@ const Item = () => {
               <Qty
                 type='number'
                 step='1'
+                disabled={isAdded}
                 disableUnderline
                 value={cartItem.quantity}
                 onChange={(e) => handleQuantity(e)}

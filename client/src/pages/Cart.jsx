@@ -1,14 +1,16 @@
 import React, { useContext } from 'react'
 import CartItem from '../components/cart/CartItem'
 import { CartContext } from '../context/CartContext'
-import { Container, List, styled, Typography } from '@mui/material'
+import { Button, Container, List, styled, Typography } from '@mui/material'
+import SendIcon from '@mui/icons-material/Send';
 
 const Cart = ({ currentUser }) => {
-  const [cart, setCart] = useContext(CartContext)
+  const [cart, setCart, total] = useContext(CartContext)
+  // const [order, setOrder] = useState({})
 
   console.log("currentUser: ", currentUser)
   console.log("CART: ", cart)
-
+  console.log("TOTAL FROM CART: ", total)
   
   const handleDelete = (id) => {
     const updatedCart = cart.filter((i) => i.item_id !== id)
@@ -17,9 +19,8 @@ const Cart = ({ currentUser }) => {
 
   const listOfCartItems = cart.map((item) => (
     <CartItem 
-      key={item.id} 
+      key={item.item_id} 
       cartItem={item} 
-      onCartUpdate={setCart} 
       onDeleteItem={handleDelete}  
     />
   ))
@@ -30,7 +31,8 @@ const Cart = ({ currentUser }) => {
       <CartList dense={true}>
         { listOfCartItems }
       </CartList>
-
+      <Total variant="h5" >Total: ${total}</Total>
+      <SubmitBtn variant="contained" endIcon={<SendIcon />}>Submit Order</SubmitBtn>
       {/* delivery address, submit button nav=>'/' */}
     </CartContainer>
   )
@@ -55,4 +57,12 @@ const CartList = styled(List)({
 const Title = styled(Typography)({
   textAlign: 'center',
   margin: '15px 0 0'
+})
+
+const Total = styled(Typography)({
+
+})
+
+const SubmitBtn = styled(Button)({
+
 })
