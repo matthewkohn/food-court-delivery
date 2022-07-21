@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { CartContext } from '../context/CartContext'
 import { Box, Button, ButtonGroup, Container, FormControlLabel, FormGroup, Input, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 
-const Item = ({ cart, onCartChange }) => {
+const Item = () => {
   const [item, setItem] = useState({})
   const [menuName, setMenuName] = useState("")
   const [isAdded, setIsAdded] = useState(false)
-  
+  const [cart, setCart] = useContext(CartContext)
   const navigate = useNavigate()
   const location = useLocation()
   const currentItem = location.state[0]
@@ -32,7 +33,7 @@ const Item = ({ cart, onCartChange }) => {
   }, [currentItem, currentMenu, location])
 
   const handleQuantity = (e) => {
-    const qty = parseFloat(e.target.value)
+    const qty = e.target.value
     if (qty > 0) {
       const newSubtotal = (item.price * qty).toLocaleString("en-US", {maximumFractionDigits:2})
       setCartItem({
@@ -44,7 +45,7 @@ const Item = ({ cart, onCartChange }) => {
   }
 
   const handleAddToCart = () => {
-    onCartChange( [ ...cart, cartItem ] )
+    setCart( [ ...cart, cartItem ] )
     setIsAdded(true)
   }
 

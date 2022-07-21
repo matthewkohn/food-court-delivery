@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import CartItem from '../components/cart/CartItem'
+import { CartContext } from '../context/CartContext'
 import { Container, List, styled, Typography } from '@mui/material'
 
-const Cart = ({ cart, onCartChange, currentUser }) => {
+const Cart = ({ currentUser }) => {
+  const [cart, setCart] = useContext(CartContext)
 
   console.log("currentUser: ", currentUser)
   console.log("CART: ", cart)
@@ -10,14 +12,14 @@ const Cart = ({ cart, onCartChange, currentUser }) => {
   
   const handleDelete = (id) => {
     const updatedCart = cart.filter((i) => i.item_id !== id)
-    onCartChange(updatedCart)
+    setCart(updatedCart)
   }
 
   const listOfCartItems = cart.map((item) => (
     <CartItem 
       key={item.id} 
       cartItem={item} 
-      onCartUpdate={onCartChange} 
+      onCartUpdate={setCart} 
       onDeleteItem={handleDelete}  
     />
   ))

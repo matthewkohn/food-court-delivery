@@ -7,10 +7,10 @@ import Item from '../pages/Item'
 import Cart from '../pages/Cart'
 import { Routes, Route } from 'react-router-dom'
 import { Container, styled } from '@mui/material'
+import { CartProvider } from '../context/CartContext'
 
 function App() {
   const [user, setUser] = useState(null)
-  const [cart, setCart] = useState([])
 
   useEffect(() => {
     fetch("/me")
@@ -26,26 +26,17 @@ function App() {
   if (!user) return <SignIn onLogin={setUser} />
 
   return (
-    <AppContainer>
-      <Navbar logout={ setUser } />
-      <Routes>
-        <Route path='/' element={ <Menus currentUser={ user } /> } />
-        <Route path='/menus/:id' element={ <MenuItems /> } />
-        <Route path='/item/:id' element={ 
-          <Item 
-            cart={ cart }
-            onCartChange={ setCart } 
-          />} 
-        />
-        <Route path='/cart' element={ 
-          <Cart 
-            cart={ cart } 
-            currentUser={ user } 
-            onCartChange={ setCart } 
-          /> } 
-        />
-      </Routes>
-    </AppContainer>
+    <CartProvider>
+      <AppContainer>
+        <Navbar logout={ setUser } />
+        <Routes>
+          <Route path='/' element={ <Menus currentUser={ user } /> } />
+          <Route path='/menus/:id' element={ <MenuItems /> } />
+          <Route path='/item/:id' element={ <Item />} />
+          <Route path='/cart' element={ <Cart currentUser={user} /> } />
+        </Routes>
+      </AppContainer>
+    </CartProvider>
   );
 }
 
