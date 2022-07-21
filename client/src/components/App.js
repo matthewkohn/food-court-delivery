@@ -11,6 +11,7 @@ import { Container, styled } from '@mui/material'
 
 function App() {
   const [user, setUser] = useState(null)
+  const [cart, setCart] = useState([])
 
   useEffect(() => {
     fetch("/me")
@@ -25,15 +26,27 @@ function App() {
 
   if (!user) return <SignIn onLogin={setUser} />
 
+  console.log("USER FROM APP: ", user)
 
   return (
     <AppContainer>
-      <Navbar logout={setUser} />
+      <Navbar logout={ setUser } />
       <Routes>
-        <Route path='/' element={ <Menus /> } />
+        <Route path='/' element={ <Menus currentUser={ user } /> } />
         <Route path='/menus/:id' element={ <MenuItems /> } />
-        <Route path='/item/:id' element={ <Item />} />
-        <Route path='/cart' element={ <Cart /> } />
+        <Route path='/item/:id' element={ 
+          <Item 
+            cart={ cart }
+            onCartChange={ setCart } 
+          />} 
+        />
+        <Route path='/cart' element={ 
+          <Cart 
+            cart={ cart } 
+            currentUser={ user } 
+            onCartChange={ setCart } 
+          /> } 
+        />
       </Routes>
     </AppContainer>
   );

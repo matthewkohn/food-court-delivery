@@ -9,7 +9,6 @@ const MenuItems = () => {
   const location = useLocation()
   const url = location.pathname
 
-
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -18,7 +17,6 @@ const MenuItems = () => {
         setItems(data.items)
       })
   }, [url])
-
 
   const itemsList = items.map(item => {
     return (
@@ -29,7 +27,6 @@ const MenuItems = () => {
         <Detail>${item.price}</Detail>
         <Detail>{item.description}</Detail>
       </ItemCard>
-
     )
   })
 
@@ -51,7 +48,6 @@ const MenuItems = () => {
         { itemsList }
       </ItemsContainer>
     </>
-    
   )
 }
 

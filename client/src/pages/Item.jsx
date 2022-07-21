@@ -1,41 +1,57 @@
-// import React, { useContext, useEffect, useState } from 'react'
 import React, { useEffect, useState } from 'react'
-// import { CartContext } from '../components/context/CartContext'
 import { Box, Button, ButtonGroup, Container, FormControlLabel, FormGroup, Input, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 
-const Item = () => {
+const Item = ({ cart, onCartChange }) => {
   const [item, setItem] = useState({})
   const [menuName, setMenuName] = useState("")
-  const [quantity, setQuantity] = useState(1)
-  // const [cart, setCart] = useContext(CartContext)
-  const location = useLocation()
+  const [isAdded, setIsAdded] = useState(false)
+  
   const navigate = useNavigate()
+  const location = useLocation()
+  const currentItem = location.state[0]
+  const currentMenu = location.state[1]
+
+  const [cartItem, setCartItem] = useState({
+    menu_name: currentMenu,
+    item_name: currentItem.name,
+    item_id: currentItem.id,
+    unit_price: parseFloat(currentItem.price),
+    quantity: 1,
+    subtotal: parseFloat(currentItem.price)
+  })
 
   useEffect(() => {
     if (location.state !== null) {
-      setItem(location.state[0])
-      setMenuName(location.state[1])
+      setItem(currentItem)
+      setMenuName(currentMenu)
+    } else {
+      return <LoadError variant="h3" >Uh oh, something went really wrong!</LoadError>
     }
-  }, [location])
+  }, [currentItem, currentMenu, location])
 
   const handleQuantity = (e) => {
-    const qty = e.target.value
+    const qty = parseFloat(e.target.value)
     if (qty > 0) {
-      setQuantity(e.target.value)
+      const newSubtotal = item.price * qty
+      setCartItem({
+        ...cartItem,
+        quantity: qty,
+        subtotal: newSubtotal
+      })
     }
   }
 
-  // const handleAddToCart = () => {
-  //   console.log("CliCK")
-  //   const contents = {
-
-  //   }
-  // }
+  const handleAddToCart = () => {
+    onCartChange( [ ...cart, cartItem ] )
+    setIsAdded(true)
+  }
 
 
-  // console.log("CART: ", cart)
+  console.log("ITEM: ", item)
+  console.log("cartItem: ", cartItem)
+  console.log("CART: ", cart)
 
   return (
     <ItemContainer>
@@ -58,6 +74,12 @@ const Item = () => {
             >
               Browse Other Menus
             </ActionBtn>
+            <ActionBtn
+              onClick={ () => navigate('/cart') }
+              variant='outlined'
+            >
+              Check Out
+            </ActionBtn>
           </ButtonGroup>
         </Section>
 
@@ -71,15 +93,15 @@ const Item = () => {
                 type='number'
                 step='1'
                 disableUnderline
-                value={quantity}
+                value={cartItem.quantity}
                 onChange={(e) => handleQuantity(e)}
               />
             }
           />
           <OrderBtn
-            // onClick={() => handleAddToCart()}
-            onClick={() => console.log("click")}
+            onClick={() => handleAddToCart()}
             variant='contained'
+            disabled={isAdded}
           >
             Add To Cart
           </OrderBtn>
@@ -98,6 +120,10 @@ const ItemContainer = styled(Container)({
   border: '3px solid #DDC',
   borderRadius: '30px',
   height: '60vh'
+})
+
+const LoadError = styled(Typography)({
+  color: 'red'
 })
 
 const Title = styled(Typography)({

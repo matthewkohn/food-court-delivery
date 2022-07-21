@@ -3,7 +3,7 @@ import MenuCard from '../components/menu/MenuCard'
 import OrderHistory from '../components/menu/OrderHistory'
 import { Box, Container, styled, Typography } from '@mui/material'
 
-const Menus = () => {
+const Menus = ({ currentUser }) => {
   const [menus, setMenus] = useState([])
 
   useEffect(() => {
@@ -12,9 +12,11 @@ const Menus = () => {
       .then(setMenus)
 
   }, [])
+  console.log("MENUS: ", menus)
 
   return (
     <MenuContainer>
+      <Typography variant='h5'>Welcome, {currentUser.username}!</Typography>
       <Typography variant='h4'>Choose a Menu</Typography>
       <MenuBox>
         {menus.map((menu) => ( <MenuCard menu={menu} key={menu.id} /> ))}
