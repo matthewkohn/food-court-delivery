@@ -7,10 +7,8 @@ import SendIcon from '@mui/icons-material/Send';
 const Cart = ({ currentUser }) => {
   const [cart, setCart, total] = useContext(CartContext)
   // const [order, setOrder] = useState({})
+  console.log("CurrentUser from CART: ", currentUser)
 
-  console.log("currentUser: ", currentUser)
-  console.log("CART: ", cart)
-  console.log("TOTAL FROM CART: ", total)
   
   const handleDelete = (id) => {
     const updatedCart = cart.filter((i) => i.item_id !== id)
@@ -33,7 +31,6 @@ const Cart = ({ currentUser }) => {
       </CartList>
       <Total variant="h5" >Total: ${total}</Total>
       <SubmitBtn variant="contained" endIcon={<SendIcon />}>Submit Order</SubmitBtn>
-      {/* delivery address, submit button nav=>'/' */}
     </CartContainer>
   )
 }

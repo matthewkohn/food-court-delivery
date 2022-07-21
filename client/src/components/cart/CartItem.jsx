@@ -6,7 +6,7 @@ const CartItem = ({ cartItem, onDeleteItem }) => {
 
 
 
-  console.log("CART ITEM: ", cartItem)
+  // console.log("CART ITEM: ", cartItem)
   return (
     <ListItem
       secondaryAction={

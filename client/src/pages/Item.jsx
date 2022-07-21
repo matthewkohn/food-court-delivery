@@ -13,6 +13,7 @@ const Item = () => {
   const location = useLocation()
   const currentItem = location.state[0]
   const currentMenu = location.state[1]
+  const findItem = cart.some(i => i.item_id === currentItem.id)
 
   const [cartItem, setCartItem] = useState({
     menu_name: currentMenu,
@@ -24,13 +25,10 @@ const Item = () => {
   })
 
   useEffect(() => {
-    if (location.state !== null) {
-      setItem(currentItem)
-      setMenuName(currentMenu)
-    } else {
-      return <LoadError variant="h3" >Uh oh, something went really wrong!</LoadError>
-    }
-  }, [currentItem, currentMenu, location])
+    setItem(currentItem)
+    setMenuName(currentMenu)
+    setIsAdded(findItem)
+  }, [currentItem, currentMenu, findItem])
 
   const handleQuantity = (e) => {
     const qty = e.target.value
@@ -43,6 +41,12 @@ const Item = () => {
       })
     }
   }
+
+  // console.log("Cart from ITEM: ", cart)
+  // console.log("findInsideCart from ITEM: ", cart.some(i => i.item_id === currentItem.id))
+  // console.log("Current Item in ITEM: ", currentItem)
+  // console.log("isAdded from ITEM: ", isAdded)
+  // console.log("findItem from ITEM: ", findItem)
 
   const handleAddToCart = () => {
     setCart( [ ...cart, cartItem ] )
@@ -117,10 +121,6 @@ const ItemContainer = styled(Container)({
   border: '3px solid #DDC',
   borderRadius: '30px',
   height: '60vh'
-})
-
-const LoadError = styled(Typography)({
-  color: 'red'
 })
 
 const Title = styled(Typography)({

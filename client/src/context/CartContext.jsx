@@ -5,13 +5,14 @@ const CartContext = React.createContext()
 function CartProvider({ children }) {
   const [cart, setCart] = useState([])
   const [total, setTotal] = useState(0)
+  
+  useEffect(() => {
+    const totalFromCart = cart.map((item) => item.subtotal).reduce((p, c) => p + c, 0)
+    const newTotal = totalFromCart.toLocaleString("en-US", {maximumFractionDigits:2, minimumFractionDigits:2})
+    setTotal(newTotal)
+  }, [cart])
 
   const value = [cart, setCart, total]
-
-  useEffect(() => {
-    const totalFromCart = cart.map((item) => item.subtotal).reduce((prev, curr) => prev + curr, 0)
-    setTotal(totalFromCart.toLocaleString("en-US", {maximumFractionDigits:2}))
-  }, [cart])
 
   return (
     <CartContext.Provider value={ value }>
