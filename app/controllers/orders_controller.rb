@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    # byebug
     if @order.valid?
       @order.save
       render json: @order
@@ -23,7 +24,7 @@ class OrdersController < ApplicationController
       :user_id, 
       :total, 
       :item_count, 
-      order_items_attributes: [:item_id, :unit_price, :quantity, :subtotal, :menu_name, :item_name] 
+      order_items_attributes: [:item_id, :item_name, :menu_name, :quantity, :subtotal, :unit_price] 
     )
   end
 

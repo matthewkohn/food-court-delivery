@@ -12,19 +12,17 @@ const Navbar = ({ logout }) => {
     fetch("/logout", {
       method: "DELETE"
     })
-      .then((res) => {
-        if (res.ok) { logout(null) }
-      })
-      .then(navigate('/'))
+    .then(() => logout(null))
+    .then(navigate('/'))
   }
 
   return (
     <Banner>
-      <Header variant='h3' component='div'>Foodcourt Delivery</Header>
+      <Header variant='h3' component='div'>Food Court Delivery</Header>
     
       <ButtonWrapper
         size='large'
-        onClick={ () => navigate('/')}
+        onClick={ () => navigate('/') }
       >
         <MenuBookIcon />
       </ButtonWrapper>

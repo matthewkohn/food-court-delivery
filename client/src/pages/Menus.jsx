@@ -15,7 +15,7 @@ const Menus = ({ currentUser }) => {
 
   return (
     <MenuContainer>
-      <Typography variant='h5'>Welcome, {currentUser.username}!</Typography>
+      <Typography variant='h5'>Welcome to the Food Court, {currentUser.username}!</Typography>
       <Typography variant='h4'>Choose a Menu</Typography>
       <MenuBox>
         {menus.map((menu) => ( <MenuCard menu={menu} key={menu.id} /> ))}
