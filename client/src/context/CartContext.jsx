@@ -10,7 +10,8 @@ function CartProvider({ children }) {
   useEffect(() => {
     const totalFromCart = cart.map((item) => item.subtotal).reduce((p, c) => p + c, 0)
     const newTotal = totalFromCart.toLocaleString("en-US", {maximumFractionDigits:2, minimumFractionDigits:2})
-    setTotal(newTotal)
+    setTotal(parseFloat(newTotal))
+
     const newCount = cart.map((item) => parseInt(item.quantity)).reduce((p, c) => p + c, 0)
     setItemCount(newCount)
   }, [cart])

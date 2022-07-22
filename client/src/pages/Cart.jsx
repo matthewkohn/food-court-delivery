@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import CartItem from '../components/cart/CartItem'
 import { CartContext } from '../context/CartContext'
-import { Button, Container, List, styled, Typography } from '@mui/material'
+import { Button, Container,  List, styled, Typography } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import { useNavigate } from 'react-router-dom'
@@ -9,12 +9,28 @@ import { useNavigate } from 'react-router-dom'
 const Cart = ({ currentUser }) => {
   const [cart, setCart, total, itemCount] = useContext(CartContext)
   const navigate = useNavigate()
+  
+  const orderJsonBody = {
+    user_id: currentUser.id,
+    total: total,
+    item_count: itemCount,
+    order_items_attributes: cart
+  }
 
-  // const [order, setOrder] = useState({})
-  console.log("CurrentUser from CART: ", currentUser)
-  console.log("Cart from CART: ", cart)
-  console.log("ItemCount from CART: ", itemCount)
-
+  const handleOrder = (e) => {
+    e.preventDefault()
+    const url = '/orders'
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderJsonBody),
+    })
+    .then((res) => res.json())
+    .then(() => {
+      setCart([])
+      navigate('/')
+    })
+  }
   
   const handleDelete = (id) => {
     const updatedCart = cart.filter((i) => i.item_id !== id)
@@ -30,10 +46,14 @@ const Cart = ({ currentUser }) => {
   ))
 
   return (
-    <CartContainer>
+    <CartContainer
+      component="form" 
+      onSubmit={(e) => handleOrder(e)} 
+      id="order-form"
+    >
       <Title variant="h4">Order Summary</Title>
       <CartList dense={true}>
-        { listOfCartItems }
+        { cart.length === 0 ? <EmptyCartText>Nothing ordered yet.</EmptyCartText> : listOfCartItems }
       </CartList>
       <Summary>
         <BackToMenusBtn 
@@ -44,7 +64,14 @@ const Cart = ({ currentUser }) => {
           Keep Shopping
         </BackToMenusBtn>
         <Total variant="h5" >Total: ${total}</Total>
-        <SubmitBtn variant="contained" endIcon={<SendIcon />}>Submit Order</SubmitBtn>
+        <SubmitBtn 
+          variant="contained" 
+          type="submit" 
+          form="order-form"
+          endIcon={<SendIcon />}
+        >
+          Submit Order
+        </SubmitBtn>
       </Summary>
     </CartContainer>
   )
@@ -57,7 +84,16 @@ const CartContainer = styled(Container)({
   margin: '120px auto',
   border: '3px solid #DDC',
   borderRadius: '30px',
-  height: '50vh'
+  height: '50vh',
+  width: '100%',
+})
+
+const EmptyCartText = styled(Typography)({
+  textAlign: 'center',
+  color: 'red',
+  margin: '10vh auto',
+  fontStyle: 'italic',
+  opacity: '0.5',
 })
 
 const CartList = styled(List)({
