@@ -6,29 +6,64 @@ puts "....."
 
 require 'faker'
 
-User.create(username: "Matt", password: "happy", admin: true)
+User.create(username: "Matt", password: "happy")
 User.create(username: "Logan", password: "running")
 
-ice_cream = Menu.create(name: "99 Flavors Ice Cream Shop")
-mexican = Menu.create(name: "Senora Marta's")
-deli = Menu.create(name: "Hoagies 'n Grinders")
-chinese = Menu.create(name: "Mandarin Buffet")
-chocolate = Menu.create(name: "Chocolate Lover's Bakery")
-healthy = Menu.create(name: "Green Goddess Cuisine")
+random1 = Menu.create(name: Faker::Restaurant.name)
+random2 = Menu.create(name: Faker::Restaurant.name)
+random3 = Menu.create(name: Faker::Restaurant.name)
+random4 = Menu.create(name: Faker::Restaurant.name)
+random5 = Menu.create(name: Faker::Restaurant.name)
+random6 = Menu.create(name: Faker::Restaurant.name)
+random7 = Menu.create(name: Faker::Restaurant.name)
+random8 = Menu.create(name: Faker::Restaurant.name)
+random9 = Menu.create(name: Faker::Restaurant.name)
+random10 = Menu.create(name: Faker::Restaurant.name)
+random11 = Menu.create(name: Faker::Restaurant.name)
+random12 = Menu.create(name: Faker::Restaurant.name)
 
-# ice_cream = Menu.find_by(id: 1)
-# mexican = Menu.find_by(id: 2)
-# deli = Menu.find_by(id: 3)
-# chinese = Menu.find_by(id: 4)
-# chocolate = Menu.find_by(id: 5)
-# healthy = Menu.find_by(id: 6)
-
-20.times do
+36.times do
   Item.create(
-    name: Faker::Dessert.flavor,
+    name: "#{Faker::Dessert.flavor} ice cream",
     description: Faker::Adjective.positive,
     price: 3.99,
-    menu: ice_cream
+    menu: random1
+  )
+end
+
+7.times do
+  Item.create(
+    name: Faker::Food.dish,
+    description: Faker::Food.description,
+    price: rand(9.01..15.99),
+    menu: random2
+  )
+end
+
+5.times do
+  Item.create(
+    name: Faker::Food.dish,
+    description: Faker::Food.description,
+    price: rand(9.01..12.99),
+    menu: random3
+  )
+end
+
+6.times do
+  Item.create(
+    name: Faker::Food.dish,
+    description: Faker::Food.description,
+    price: rand(5.01..15.99),
+    menu: random4
+  )
+end
+
+18.times do
+  Item.create(
+    name: Faker::Dessert.variety,
+    description: "Served with #{Faker::Dessert.topping}",
+    price: rand(4.90..10.01),
+    menu: random5
   )
 end
 
@@ -36,35 +71,44 @@ end
   Item.create(
     name: Faker::Food.dish,
     description: Faker::Food.description,
-    price: rand(9.01..15.99),
-    menu: mexican
+    price: rand(12.01..25.99),
+    menu: random6
   )
 end
 
-8.times do
+5.times do
   Item.create(
     name: Faker::Food.dish,
     description: Faker::Food.description,
-    price: rand(9.01..12.99),
-    menu: deli
+    price: rand(22.01..45.99),
+    menu: random7
   )
 end
 
-11.times do
+12.times do
+  Item.create(
+    name: Faker::Coffee.blend_name,
+    description: Faker::Coffee.notes,
+    price: rand(2.01..9.99),
+    menu: random8
+  )
+end
+
+10.times do
+  Item.create(
+    name: Faker::Food.ingredient,
+    description: Faker::Food.description,
+    price: rand(1.99..5.99),
+    menu: random9
+  )
+end
+
+5.times do
   Item.create(
     name: Faker::Food.dish,
     description: Faker::Food.description,
-    price: rand(5.01..15.99),
-    menu: chinese
-  )
-end
-
-9.times do
-  Item.create(
-    name: Faker::Dessert.variety,
-    description: "Served with #{Faker::Dessert.topping}",
-    price: rand(4.90..20.01),
-    menu: chocolate
+    price: rand(8.01..15.99),
+    menu: random10
   )
 end
 
@@ -73,7 +117,16 @@ end
     name: Faker::Food.dish,
     description: Faker::Food.description,
     price: rand(12.01..25.99),
-    menu: healthy
+    menu: random11
+  )
+end
+
+9.times do
+  Item.create(
+    name: Faker::Food.sushi,
+    description: Faker::Food.description,
+    price: rand(12.01..25.99),
+    menu: random12
   )
 end
 

@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
       :user_id, 
       :total, 
       :item_count, 
-      order_items_attributes: [:item_id, :unit_price, :quantity, :subtotal] 
+      order_items_attributes: [:item_id, :unit_price, :quantity, :subtotal, :menu_name, :item_name] 
     )
   end
 

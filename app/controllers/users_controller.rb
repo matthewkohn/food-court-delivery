@@ -10,12 +10,12 @@ class UsersController < ApplicationController
   def show
     render json: @current_user
   end
-  # def update for delivery_address
+
 
   private
 
   def user_params
-    params.permit(:username, :password, :password_confirmation, :admin, :delivery_address)
+    params.permit(:username, :password, :password_confirmation)
   end
 
 
