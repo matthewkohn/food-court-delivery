@@ -31,7 +31,8 @@ const Item = () => {
   }, [currentItem, currentMenu, findItem])
 
   const handleQuantity = (e) => {
-    const qty = e.target.value
+    const qty = parseInt(e.target.value)
+    // console.log("QTY from handleQTY in ITEM: ", typeof qty)
     if (qty > 0) {
       const newSubtotal = (item.price * qty).toLocaleString("en-US", {maximumFractionDigits:2})
       setCartItem({

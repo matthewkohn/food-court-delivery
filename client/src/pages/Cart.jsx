@@ -7,12 +7,13 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import { useNavigate } from 'react-router-dom'
 
 const Cart = ({ currentUser }) => {
-  const [cart, setCart, total] = useContext(CartContext)
+  const [cart, setCart, total, itemCount] = useContext(CartContext)
   const navigate = useNavigate()
 
   // const [order, setOrder] = useState({})
   console.log("CurrentUser from CART: ", currentUser)
   console.log("Cart from CART: ", cart)
+  console.log("ItemCount from CART: ", itemCount)
 
   
   const handleDelete = (id) => {
