@@ -44,6 +44,5 @@ export default App;
 
 
 const AppContainer = styled(Container)({
-  margin: 0,
-  width: '100vw'
+  margin: 'auto',
 })

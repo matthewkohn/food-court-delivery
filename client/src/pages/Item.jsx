@@ -42,12 +42,6 @@ const Item = () => {
     }
   }
 
-  // console.log("Cart from ITEM: ", cart)
-  // console.log("findInsideCart from ITEM: ", cart.some(i => i.item_id === currentItem.id))
-  // console.log("Current Item in ITEM: ", currentItem)
-  // console.log("isAdded from ITEM: ", isAdded)
-  // console.log("findItem from ITEM: ", findItem)
-
   const handleAddToCart = () => {
     setCart( [ ...cart, cartItem ] )
     setIsAdded(true)
@@ -104,7 +98,7 @@ const Item = () => {
             variant='contained'
             disabled={isAdded}
           >
-            Add To Cart
+            {isAdded ? "Added to cart!" : "Add To Cart"}
           </OrderBtn>
         </Section>
       </ItemBody>
@@ -147,7 +141,7 @@ const Price = styled(Typography)({
 const Section = styled(FormGroup)({
   display: 'inherit',
   justifyContent: 'space-between',
-  alignItems: 'flex-start',
+  alignItems: 'center',
   height: '250px',
   margin: '0 15px'
 })
@@ -163,11 +157,12 @@ const OrderBtn = styled(Button)({
 })
 
 const Qty = styled(Input)({
-  width: '60px',
+  width: '100px',
   height: '30px',
   padding: '15px',
   margin: '10px',
-  textAlign: 'center',
+  textAlign: 'right',
   textDecoration: 'none',
-  fontSize: '24px'
+  fontSize: '24px',
+  borderRadius: '5px',
 })
