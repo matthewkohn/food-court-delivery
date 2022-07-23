@@ -16,8 +16,6 @@ const Item = () => {
   const findItem = cart.some(i => i.item_id === currentItem.id)
 
   const [cartItem, setCartItem] = useState({
-    menu_name: currentMenu,
-    item_name: currentItem.name,
     item_id: currentItem.id,
     unit_price: parseFloat(currentItem.price),
     quantity: 1,
@@ -46,6 +44,7 @@ const Item = () => {
   const handleAddToCart = () => {
     setCart( [ ...cart, cartItem ] )
     setIsAdded(true)
+    // make POST to send CartItem to '/cart_items'
   }
 
   return (

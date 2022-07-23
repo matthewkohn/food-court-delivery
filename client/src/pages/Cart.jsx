@@ -35,6 +35,7 @@ const Cart = ({ currentUser }) => {
   const handleDelete = (id) => {
     const updatedCart = cart.filter((i) => i.item_id !== id)
     setCart(updatedCart)
+    // make DELETE request to '/cart_items/:id'
   }
 
   const listOfCartItems = cart.map((item) => (

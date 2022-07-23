@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
  
+  resources :cart_items, only: [:create]
+  resources :carts, only: [:index]
   resources :orders, only: [:index, :create]
   resources :items, only: [:index]
   resources :menus, only: [:index, :show]
