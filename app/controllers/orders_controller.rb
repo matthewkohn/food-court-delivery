@@ -6,7 +6,6 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    # byebug
     if @order.valid?
       @order.save
       render json: @order
@@ -14,7 +13,6 @@ class OrdersController < ApplicationController
       render json: { error: "Bad request" }, status: 400
     end
   end
-
 
 
   private

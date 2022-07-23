@@ -1,7 +1,12 @@
 class CartItemsController < ApplicationController
 
+  def index
+    @user = User.find_by(id: session[:user_id])
+    @cart_items = CartItem.all.where(cart_id: @user.cart.id)
+    render json: @cart_items
+  end
+
   def create
-    # byebug
     @cart_item = CartItem.new(cart_item_params)
     if @cart_item.valid?
       @cart_item.save!
@@ -11,11 +16,23 @@ class CartItemsController < ApplicationController
     end
   end
 
+  def update
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.update(cart_item_params)
+    render json: @cart_item
+  end
+
+  def destroy
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.destroy
+    render json: { error: "Item has been removed from your cart."}
+  end
+
 
   private
 
   def cart_item_params
-    params.permit(:cart_id, :item_id, :quantity, :unit_price, :subtotal)
+    params.permit(:id, :cart_id, :item_id, :quantity)
   end
 
 

@@ -6,8 +6,8 @@ puts "....."
 
 require 'faker'
 
-User.create(username: "Matt", password: "happy")
-User.create(username: "Logan", password: "running")
+# User.create(username: "Matt", password: "happy", password_confirmation: "happy")
+# User.create(username: "Logan", password: "running" password_confirmation: "running")
 
 random1 = Menu.create(name: Faker::Restaurant.name)
 random2 = Menu.create(name: Faker::Restaurant.name)
