@@ -3,6 +3,7 @@ import Error from './Error'
 import { Box, Button, FormControl, styled, TextField } from '@mui/material'
 import LoginIcon from '@mui/icons-material/Login'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = ({ hideSignUp, onLogin }) => {
   const [userInfo, setUserInfo] = useState({
@@ -13,6 +14,7 @@ const LoginForm = ({ hideSignUp, onLogin }) => {
   })
   const [errors, setErrors] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleUserInput = (e) => {
     const inputName = e.target.name
@@ -39,6 +41,7 @@ const LoginForm = ({ hideSignUp, onLogin }) => {
       setIsLoading(false)
       if (res.ok) {
         res.json().then((data) => onLogin(data))
+        navigate('/menus')
       } else {
         res.json().then((err) => setErrors(err.errors))
       }

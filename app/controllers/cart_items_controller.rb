@@ -8,9 +8,11 @@ class CartItemsController < ApplicationController
 
   def create
     @cart_item = CartItem.new(cart_item_params)
+    @cart = Cart.find_by(user_id: session[:user_id])
+    @cart_item[:cart_id] = @cart.id
     if @cart_item.valid?
       @cart_item.save!
-      render json: @cart_item
+      render json: @cart_item, status: :created
     else
       render json: { error: "Bad request" }, status: 400
     end
@@ -32,7 +34,7 @@ class CartItemsController < ApplicationController
   private
 
   def cart_item_params
-    params.permit(:id, :cart_id, :item_id, :quantity)
+    params.permit(:id, :item_id, :quantity)
   end
 
 

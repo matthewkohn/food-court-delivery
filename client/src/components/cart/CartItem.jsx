@@ -5,8 +5,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const CartItem = ({ cartItem, onDeleteItem }) => {
 
 
-
-  // console.log("CART ITEM: ", cartItem)
+// make quantity changeable & send PATCH to '/cart_items'
+  console.log("CART ITEM: ", cartItem)
   return (
     <ListItem
       secondaryAction={

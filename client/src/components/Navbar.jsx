@@ -22,7 +22,7 @@ const Navbar = ({ logout }) => {
     
       <ButtonWrapper
         size='large'
-        onClick={ () => navigate('/') }
+        onClick={ () => navigate('/menus') }
       >
         <MenuBookIcon />
       </ButtonWrapper>

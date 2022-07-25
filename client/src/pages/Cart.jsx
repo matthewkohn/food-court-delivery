@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CartItem from '../components/cart/CartItem'
 import { CartContext } from '../context/CartContext'
 import { Button, Container,  List, styled, Typography } from '@mui/material'
@@ -7,15 +7,19 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import { useNavigate } from 'react-router-dom'
 
 const Cart = ({ currentUser }) => {
+  const [orderJsonBody, setOrderJsonBody] = useState({})
   const [cart, setCart, total, itemCount] = useContext(CartContext)
   const navigate = useNavigate()
   
-  const orderJsonBody = {
-    user_id: currentUser.id,
-    total: total,
-    item_count: itemCount,
-    order_items_attributes: cart
-  }
+  useEffect(() => {
+    const order = {
+      user_id: currentUser.id,
+      total: total,
+      item_count: itemCount,
+      order_items_attributes: cart
+    }
+    setOrderJsonBody(order)
+  }, [cart, currentUser, itemCount, total])
 
   const handleOrder = (e) => {
     e.preventDefault()
@@ -28,7 +32,8 @@ const Cart = ({ currentUser }) => {
     .then((res) => res.json())
     .then(() => {
       setCart([])
-      navigate('/')
+      navigate('/menus')
+      // make DELETE fetch to API => cart_items.destroy_all 
     })
   }
   
@@ -60,7 +65,7 @@ const Cart = ({ currentUser }) => {
         <BackToMenusBtn 
           variant="contained" 
           startIcon={<AddShoppingCartIcon />}
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/menus')}
         >
           Keep Shopping
         </BackToMenusBtn>

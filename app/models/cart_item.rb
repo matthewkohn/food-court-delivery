@@ -22,7 +22,6 @@ class CartItem < ApplicationRecord
     self[:quantity] * unit_price
   end
 
-
   private
 
   def set_menu_name
@@ -40,5 +39,6 @@ class CartItem < ApplicationRecord
   def set_subtotal
     self[:subtotal] = subtotal
   end
+
 
 end

@@ -30,7 +30,7 @@ function App() {
       <AppContainer>
         <Navbar logout={ setUser } />
         <Routes>
-          <Route path='/' element={ <Menus currentUser={ user } /> } />
+          <Route path='/menus' element={ <Menus currentUser={ user } /> } />
           <Route path='/menus/:id' element={ <MenuItems /> } />
           <Route path='/item/:id' element={ <Item />} />
           <Route path='/cart' element={ <Cart currentUser={user} /> } />
