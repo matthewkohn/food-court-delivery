@@ -6,7 +6,7 @@ const CartItem = ({ cartItem, onDeleteItem }) => {
 
 
 // make quantity changeable & send PATCH to '/cart_items'
-  console.log("CART ITEM: ", cartItem)
+  // console.log("CART ITEM: ", cartItem)
   return (
     <ListItem
       secondaryAction={

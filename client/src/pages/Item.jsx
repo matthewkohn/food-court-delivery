@@ -71,7 +71,7 @@ const Item = () => {
               Back to {menuName}
             </ActionBtn>
             <ActionBtn
-              onClick={ () => navigate('/') }
+              onClick={ () => navigate('/menus') }
               variant='outlined'
             >
               Browse Other Menus

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import MenuCard from '../components/menu/MenuCard'
-import OrderHistory from '../components/menu/OrderHistory'
 import { Box, Container, styled, Typography } from '@mui/material'
 
 const Menus = ({ currentUser }) => {
@@ -19,7 +18,6 @@ const Menus = ({ currentUser }) => {
       <MenuBox>
         {menus.map((menu) => ( <MenuCard menu={menu} key={menu.id} /> ))}
       </MenuBox>
-      <OrderHistory />
     </MenuContainer>
   )
 }

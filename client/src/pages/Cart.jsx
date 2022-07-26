@@ -45,10 +45,7 @@ const Cart = ({ currentUser }) => {
   
   const handleDelete = (item) => {
     const updatedCart = cart.filter((i) => i.item_id !== item.item_id)
-    console.log("updatedCart: ", updatedCart)
-    console.log("item in handleDelete: ", item)
     setCart(updatedCart)
-    // make DELETE request to '/cart_items/:item'
     fetch(`/cart_items/${item.id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },

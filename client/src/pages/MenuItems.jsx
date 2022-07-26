@@ -38,7 +38,7 @@ const MenuItems = () => {
           <Button 
             variant='text' 
             size='large' 
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/menus')}
           >
             Go Back to Menus
           </Button>

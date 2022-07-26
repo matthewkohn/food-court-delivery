@@ -8,6 +8,7 @@ import Cart from '../pages/Cart'
 import { Routes, Route } from 'react-router-dom'
 import { Container, styled } from '@mui/material'
 import { CartProvider } from '../context/CartContext'
+import OrderHistory from '../pages/OrderHistory'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -34,6 +35,7 @@ function App() {
           <Route path='/menus/:id' element={ <MenuItems /> } />
           <Route path='/item/:id' element={ <Item />} />
           <Route path='/cart' element={ <Cart currentUser={user} /> } />
+          <Route path='/orders' element={ <OrderHistory /> } />
         </Routes>
       </AppContainer>
     </CartProvider>

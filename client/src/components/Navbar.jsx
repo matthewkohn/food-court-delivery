@@ -3,6 +3,7 @@ import { AppBar, IconButton, styled, Typography } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import HistoryIcon from '@mui/icons-material/History';
 import { useNavigate } from 'react-router-dom'
 
 const Navbar = ({ logout }) => {
@@ -25,6 +26,13 @@ const Navbar = ({ logout }) => {
         onClick={ () => navigate('/menus') }
       >
         <MenuBookIcon />
+      </ButtonWrapper>
+
+      <ButtonWrapper
+        size='large'
+        onClick={ () => navigate('/orders') }
+      >
+        <HistoryIcon />
       </ButtonWrapper>
 
       <ButtonWrapper
