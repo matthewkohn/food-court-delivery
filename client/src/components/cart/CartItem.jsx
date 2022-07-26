@@ -10,7 +10,7 @@ const CartItem = ({ cartItem, onDeleteItem }) => {
   return (
     <ListItem
       secondaryAction={
-        <IconButton edge="end" onClick={ () => onDeleteItem(cartItem.item_id) } >
+        <IconButton edge="end" onClick={ () => onDeleteItem(cartItem) } >
           <DeleteIcon />
         </IconButton>
       }

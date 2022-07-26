@@ -30,6 +30,12 @@ class CartItemsController < ApplicationController
     render json: { error: "Item has been removed from your cart."}
   end
 
+  def empty_cart
+    @cart = Cart.find_by(user_id: session[:user_id])
+    @cart.cart_items.destroy_all
+    head :no_content
+  end
+
 
   private
 

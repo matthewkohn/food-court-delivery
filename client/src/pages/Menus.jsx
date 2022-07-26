@@ -1,21 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MenuCard from '../components/menu/MenuCard'
 import OrderHistory from '../components/menu/OrderHistory'
 import { Box, Container, styled, Typography } from '@mui/material'
-import { CartContext } from '../context/CartContext'
 
 const Menus = ({ currentUser }) => {
   const [menus, setMenus] = useState([])
-  const [setCart] = useContext(CartContext)
 
   useEffect(() => {
     fetch("/menus")
       .then((res) => res.json())
       .then(setMenus)
-    fetch("/cart-items")
-      .then((res) => res.json())
-      .then(setCart)
-  }, [setCart])
+  }, [])
 
   return (
     <MenuContainer>

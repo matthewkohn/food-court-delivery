@@ -5,12 +5,18 @@ import { Button, Container,  List, styled, Typography } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import { useNavigate } from 'react-router-dom'
+import emptyCart from '../helpers/emptyCart'
 
 const Cart = ({ currentUser }) => {
   const [orderJsonBody, setOrderJsonBody] = useState({})
-  const [cart, setCart, total, itemCount] = useContext(CartContext)
+  const [cart, setCart, total, itemCount, loadCart] = useContext(CartContext)
   const navigate = useNavigate()
-  
+
+  useEffect(() => {
+    loadCart()
+    // eslint-disable-next-line
+  }, [])
+
   useEffect(() => {
     const order = {
       user_id: currentUser.id,
@@ -32,15 +38,23 @@ const Cart = ({ currentUser }) => {
     .then((res) => res.json())
     .then(() => {
       setCart([])
-      navigate('/menus')
-      // make DELETE fetch to API => cart_items.destroy_all 
+      emptyCart()
+      navigate('/menus') 
     })
   }
   
-  const handleDelete = (id) => {
-    const updatedCart = cart.filter((i) => i.item_id !== id)
+  const handleDelete = (item) => {
+    const updatedCart = cart.filter((i) => i.item_id !== item.item_id)
+    console.log("updatedCart: ", updatedCart)
+    console.log("item in handleDelete: ", item)
     setCart(updatedCart)
-    // make DELETE request to '/cart_items/:id'
+    // make DELETE request to '/cart_items/:item'
+    fetch(`/cart_items/${item.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+    .then((res) => res.json())
+    .then(console.log)
   }
 
   const listOfCartItems = cart.map((item) => (

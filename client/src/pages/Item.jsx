@@ -18,7 +18,8 @@ const Item = () => {
   const [cartItem, setCartItem] = useState({
     item_id: currentItem.id,
     quantity: 1,
-    unit_price: parseFloat(currentItem.price),
+    item_name: currentItem.name,
+    menu_name: currentMenu,
     subtotal: parseFloat(currentItem.price)
   })
 
@@ -44,7 +45,6 @@ const Item = () => {
   const handleAddToCart = () => {
     setCart( [ ...cart, cartItem ] )
     setIsAdded(true)
-    // make POST to send CartItem to '/cart_items'
     fetch('/cart_items', {
       method: "POST",
       headers: { "Content-Type": "application/json" },

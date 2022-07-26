@@ -4,13 +4,15 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :create]
   resources :items, only: [:index]
   resources :menus, only: [:index, :show]
+
   
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-
+  
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
   
+  delete "/empty_cart", to: "cart_items#empty_cart"
 
 
   # Routing logic: fallback requests for React Router.
