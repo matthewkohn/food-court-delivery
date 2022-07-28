@@ -1,14 +1,16 @@
 import { ListItem, Paper, styled, Typography } from '@mui/material'
 import React from 'react'
+import { formatDollar } from '../../helpers/formatDollar'
 
 const Order = ({ order }) => {
   const createdAt = new Date(order.created_at)
+  const newTotal = formatDollar(order.total)
 
   return (
     <ListItem>
       <OrderSummary>
         <Detail variant="body2">Order #{order.id}: placed on: {createdAt.toLocaleString()}</Detail>
-        <Detail variant="body2">{order.item_count} items, total: ${order.total}</Detail>
+        <Detail variant="body2">{order.item_count} items, total: ${newTotal}</Detail>
       </OrderSummary>
     </ListItem>
   )
@@ -20,7 +22,9 @@ const OrderSummary = styled(Paper)({
   display: 'flex',
   flexDirection: 'row',
   padding: '15px 20px',
-  margin: 'auto'
+  margin: 'auto',
+  width: '100%',
+  justifyContent: 'space-between'
 })
 
 const Detail = styled(Typography)({

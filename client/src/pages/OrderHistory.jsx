@@ -4,11 +4,16 @@ import { Container, List, styled, Typography } from '@mui/material'
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    setIsLoading(true)
     fetch("/orders")
       .then((res) => res.json())
-      .then(setOrders)
+      .then((pastOrders) => {
+        setOrders(pastOrders)
+        setIsLoading(false)
+      })
   }, [])
 
   const ordersList = orders.map((order) => (
@@ -18,9 +23,7 @@ const OrderHistory = () => {
   return (
     <HistoryContainer>
       <Typography variant="h5">Your Previous Orders:</Typography>
-      <OrderList>
-        { ordersList }
-      </OrderList>
+      { isLoading ? <Loading variant="h4">Preparing your Orders!</Loading> : <OrderList>{ ordersList }</OrderList> }
     </HistoryContainer>
   )
 }
@@ -40,7 +43,14 @@ const HistoryContainer = styled(Container)({
 })
 
 const OrderList = styled(List)({
-  border: '1px solid red',
+  // border: '1px solid red',
   display: 'flex',
   flexDirection: 'column',
+  width: '100%',
+})
+
+const Loading = styled(Typography)({
+  margin: '100px 0',
+  color: 'red',
+  fontStyle: 'italic'
 })

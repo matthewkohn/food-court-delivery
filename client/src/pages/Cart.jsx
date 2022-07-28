@@ -39,7 +39,7 @@ const Cart = ({ currentUser }) => {
     .then(() => {
       setCart([])
       emptyCart()
-      navigate('/menus') 
+      navigate('/orders') 
     })
   }
 

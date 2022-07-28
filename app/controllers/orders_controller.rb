@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
 
   def index
-    render json: Order.all.where(user_id: session[:user_id])
+    @orders = Order.all.where(user_id: session[:user_id])
+    render json: @orders
   end
 
   def create
