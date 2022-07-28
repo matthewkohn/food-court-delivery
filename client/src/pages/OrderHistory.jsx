@@ -23,7 +23,7 @@ const OrderHistory = () => {
   return (
     <HistoryContainer>
       <Typography variant="h5">Your Previous Orders:</Typography>
-      { isLoading ? <Loading variant="h4">Preparing your Orders!</Loading> : <OrderList>{ ordersList }</OrderList> }
+      { isLoading ? <Loading variant="h4">Preparing your Orders!</Loading> : <OrderList>{ orders.length > 0 ? ordersList : <h1>No Orders Yet.</h1>}</OrderList> }
     </HistoryContainer>
   )
 }

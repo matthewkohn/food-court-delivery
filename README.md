@@ -42,6 +42,13 @@ You can use the following commands to run the application:
 ## __Media__ <a id="media"></a>
 ##### [Back to Top](#top)
 
+### Youtube Video Demo
+[Check out the video demo here](https://youtu.be/y9ZBeHlyToM)
+
+<img src="./public/media/PhotoGIF_7_28_2022_5_20_01_PM.gif" alt="Foodcourt Delivery Gif">
+
+-----
+
 ### React Component Flowchart
 
 <img src="./public/media/v1.png" alt="react flowchart">
