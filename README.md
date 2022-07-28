@@ -59,20 +59,39 @@ You can use the following commands to run the application:
 ### User
 ```has_many :orders```
 
+```has_one :cart```
+
 ### Menu
 ```has_many :items```
 
 ### Item
-```belongs_to :order```
+```has_many :order_items```
+
+```has_many :cart_items```
 
 ```belongs_to :menu```
 
 ### Order
-```has_many :items```
-
-```has_many :menus, through: :items```
-
 ```belongs_to :user```
+
+```has_many :order_items```
+
+```has_many :items, through: :order_items```
+
+### OrderItem
+```belongs_to :order```
+
+```belongs_to :item```
+
+### Cart
+```belongs_to :user```
+
+```has_many :cart_items```
+
+### CartItem
+```belongs_to :cart```
+
+```belongs_to :item```
 
 -------
 -------
@@ -82,9 +101,7 @@ You can use the following commands to run the application:
 ```
 {
   "id": 1,
-  "username": "Matt",
-  "admin": true,
-  "delivery_address": ""
+  "username": "Matt"
 }
 ```
 -----
@@ -118,15 +135,13 @@ _____
       "id": 1,
       "name": "Breakfast Burrito",
       "price": 12,
-      "description": "Humongous egg & chorizo burrito with guacamole",
-      "thumbnail": "www.coolpicture.com"
+      "description": "Humongous egg & chorizo burrito with guacamole"
     },
     {
       "id": 2,
       "name": "Pancakes",
       "price": 10,
-      "description": "Tall stack of flapjacks with butter and maple syrup",
-      "thumbnail": "www.coolpicture2.com"
+      "description": "Tall stack of flapjacks with butter and maple syrup"
     }
     ...
     ...
@@ -141,36 +156,22 @@ _____
   "orders": [
     {
       "id": 1,
+      "user_id": 1,
       "created_at": "June 30, 2022",
       "total": 40,
       "item_count": 3,
-      "menus": [
+      "order_items": [
         {
-          "id": 3,
-          "name": "Some menu 1",
-          "items": [
-            {
-              "id": 1,
-              "name": "Dish1",
-              "price": 12
-            },
-            {
-              "id": 4,
-              "name": "Dish2",
-              "price": 17
-            }
-          ]
+          "item_id": 3,
+          "quantity": 1,
+          "subtotal": 10,
+          "unit_price": 10
         },
         {
-          "id": 4,
-          "name": "Some menu 2",
-          "items": [
-            {
-              "id": 2,
-              "name": "Dish1",
-              "price": 11
-            }
-          ]
+          "item_id": 3,
+          "quantity": 1,
+          "subtotal": 10,
+          "unit_price": 10
         }
       ]
     },
@@ -180,17 +181,12 @@ _____
       "created_at": "June 17, 2022",
       "total": 36,
       "item_count": 1,
-      "menus": [
+      "order_items": [
         {
-          "id": 1,
-          "name": "Some menu 4",
-          "items": [
-            {
-              "id": 2,
-              "name": "Dish4",
-              "price": 36
-            }
-          ]
+          "item_id": 3,
+          "quantity": 1,
+          "subtotal": 10,
+          "unit_price": 10
         }
       ]
     }
