@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CartItem from '../components/cart/CartItem'
+import CartSummary from '../components/cart/CartSummary'
 import { CartContext } from '../context/CartContext'
-import { Button, Container,  List, styled, Typography } from '@mui/material'
-import SendIcon from '@mui/icons-material/Send'
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
-import { useNavigate } from 'react-router-dom'
 import emptyCart from '../helpers/emptyCart'
+import { Container,  List, styled, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { formatDollar } from '../helpers/formatDollar'
 
 const Cart = ({ currentUser }) => {
   const [orderJsonBody, setOrderJsonBody] = useState({})
@@ -42,11 +42,36 @@ const Cart = ({ currentUser }) => {
       navigate('/menus') 
     })
   }
+
+  const handleChange = (e, itemId) => {
+    const newQuantity = e.target.value
+    if (newQuantity > 0) {
+      const updatedCart = cart.map((item) => {
+        if (item.id === itemId) {
+          const updatedItemJsonBody = {...item, quantity: newQuantity}
+          fetch(`cart_items/${itemId}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedItemJsonBody),
+          }).then((res) => res.json())
+          .then(console.log)
+          const newSubtotal = formatDollar(newQuantity * item.unit_price)
+          return { 
+            ...item, 
+            quantity: newQuantity,
+            subtotal: newSubtotal 
+          }
+        }
+        return item
+      })
+      setCart(updatedCart)
+    }
+  }
   
-  const handleDelete = (item) => {
-    const updatedCart = cart.filter((i) => i.item_id !== item.item_id)
+  const handleDelete = (itemId) => {
+    const updatedCart = cart.filter((i) => i.id !== itemId)
     setCart(updatedCart)
-    fetch(`/cart_items/${item.id}`, {
+    fetch(`/cart_items/${itemId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
@@ -58,7 +83,8 @@ const Cart = ({ currentUser }) => {
     <CartItem 
       key={item.item_id} 
       cartItem={item} 
-      onDeleteItem={handleDelete}  
+      onDeleteItem={handleDelete}
+      onQuantityChange={handleChange}  
     />
   ))
 
@@ -72,24 +98,7 @@ const Cart = ({ currentUser }) => {
       <CartList dense={true}>
         { cart.length === 0 ? <EmptyCartText>Nothing ordered yet.</EmptyCartText> : listOfCartItems }
       </CartList>
-      <Summary>
-        <BackToMenusBtn 
-          variant="contained" 
-          startIcon={<AddShoppingCartIcon />}
-          onClick={() => navigate('/menus')}
-        >
-          Keep Shopping
-        </BackToMenusBtn>
-        <Total variant="h5" >Total: ${total}</Total>
-        <SubmitBtn 
-          variant="contained" 
-          type="submit" 
-          form="order-form"
-          endIcon={<SendIcon />}
-        >
-          Submit Order
-        </SubmitBtn>
-      </Summary>
+      <CartSummary total={total} />
     </CartContainer>
   )
 }
@@ -123,45 +132,3 @@ const Title = styled(Typography)({
   textAlign: 'center',
   margin: '15px 0 0'
 })
-
-const Summary = styled(Container)({
-  display: 'flex',
-  justifyContent: 'space-around',
-  width: '100%',
-  margin: 'auto',
-  padding: '30px 0'
-})
-
-const BackToMenusBtn = styled(Button)({
-  borderRadius: '20px',
-  padding: '0 30px',
-  '&:hover': {
-    backgroundColor: '#BA5421',
-    color: '#DDC',
-    fontSize: '16px',
-    padding: '0 21.5px',
-  }
-})
-
-const Total = styled(Typography)({
-  fontStyle: 'italic',
-  fontWeight: 'bolder',
-  color: '#BA5421',
-  background: '#BCEACB',
-  padding: '15px',
-  borderRadius: '10px',
-  width: '200px',
-  textAlign: 'center',
-})
-
-const SubmitBtn = styled(Button)({
-  borderRadius: '20px',
-  padding: '0 30px',
-  '&:hover': {
-    backgroundColor: '#21BA54',
-    color: '#DDC',
-    fontSize: '16px',
-    padding: '0 22px',
-  }
-})
-

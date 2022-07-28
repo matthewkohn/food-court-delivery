@@ -21,7 +21,7 @@ export default MenuCard
 const RestaurantCard = styled(Card)({
   background: 'forestgreen',
   color: '#DDC',
-  margin: '0 auto 20px',
+  margin: '0 30px 30px',
   padding: '30px',
   borderRadius: '50%',
   width: '200px',

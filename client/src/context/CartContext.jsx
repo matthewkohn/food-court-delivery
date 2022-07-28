@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
+import { formatDollar } from "../helpers/formatDollar"
 
 const CartContext = React.createContext()
 
@@ -9,8 +10,8 @@ function CartProvider({ children }) {
   
   useEffect(() => {
     const totalFromCart = cart.map((item) => parseFloat(item.subtotal)).reduce((p, c) => p + c, 0)
-    const newTotal = totalFromCart.toLocaleString("en-US", {maximumFractionDigits:2, minimumFractionDigits:2})
-    setTotal(parseFloat(newTotal))
+    const newTotal = formatDollar(totalFromCart)
+    setTotal(newTotal)
     const newCount = cart.map((item) => parseInt(item.quantity)).reduce((p, c) => p + c, 0)
     setItemCount(newCount)
   }, [cart])

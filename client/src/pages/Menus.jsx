@@ -34,7 +34,7 @@ const MenuContainer = styled(Container)({
 const MenuBox = styled(Box)({
   display: 'flex',
   flexWrap: 'wrap',
-  alignContent: 'flex-start',
+  alignContent: 'center',
   margin: '20px auto',
   width: '100%'
 })

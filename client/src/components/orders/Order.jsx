@@ -2,11 +2,7 @@ import { ListItem, Paper, styled, Typography } from '@mui/material'
 import React from 'react'
 
 const Order = ({ order }) => {
-
-  console.log("Order from ORDER: ", order)
-
   const createdAt = new Date(order.created_at)
-
 
   return (
     <ListItem>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../context/CartContext'
 import { Box, Button, ButtonGroup, Container, FormControlLabel, FormGroup, Input, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { formatDollar } from '../helpers/formatDollar'
 
 
 const Item = () => {
@@ -20,7 +21,7 @@ const Item = () => {
     quantity: 1,
     item_name: currentItem.name,
     menu_name: currentMenu,
-    subtotal: parseFloat(currentItem.price)
+    subtotal: formatDollar(currentItem.price)
   })
 
   useEffect(() => {
@@ -30,14 +31,13 @@ const Item = () => {
   }, [currentItem, currentMenu, findItem])
 
   const handleQuantity = (e) => {
-    const qty = parseInt(e.target.value)
-    // console.log("QTY from handleQTY in ITEM: ", typeof qty)
+    const qty = e.target.value
     if (qty > 0) {
-      const newSubtotal = (item.price * qty).toLocaleString("en-US", {maximumFractionDigits:2})
+      const newSubtotal = formatDollar(item.price * qty)
       setCartItem({
         ...cartItem,
         quantity: qty,
-        subtotal: parseFloat(newSubtotal)
+        subtotal: newSubtotal
       })
     }
   }

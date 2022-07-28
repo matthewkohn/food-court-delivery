@@ -11,12 +11,9 @@ const OrderHistory = () => {
       .then(setOrders)
   }, [])
 
-
-
   const ordersList = orders.map((order) => (
     <Order key={order.id} order={order} />
   ))
-
   
   return (
     <HistoryContainer>
@@ -24,10 +21,7 @@ const OrderHistory = () => {
       <OrderList>
         { ordersList }
       </OrderList>
-      
     </HistoryContainer>
-
-    
   )
 }
 
