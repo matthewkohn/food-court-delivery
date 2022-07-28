@@ -2,9 +2,11 @@ import React from 'react'
 import { Accordion, AccordionSummary, AccordionDetails, IconButton, Input, ListItem, Paper, styled, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { formatDollar } from '../../helpers/formatDollar';
 
 
 const CartItem = ({ cartItem, onDeleteItem, onQuantityChange }) => {
+  const newSubtotal = formatDollar(cartItem.subtotal)
 
   return (
     <ListItem
@@ -16,11 +18,13 @@ const CartItem = ({ cartItem, onDeleteItem, onQuantityChange }) => {
     >
       <ItemAccordion>
         <Info expandIcon={ <ExpandMoreIcon /> }>
-          <Typography variant="body1">{ cartItem.item_name } from "{ cartItem.menu_name }"</Typography>
-          <Details elevation={0} >
-            <Typography>Qty: { cartItem.quantity }</Typography>
-            <Typography >Subtotal: ${ cartItem.subtotal }</Typography>
-          </Details>
+          <InfoDetails elevation={0} >
+            <Typography variant="body1">{ cartItem.item_name } from "{ cartItem.menu_name }"</Typography>
+            <Details elevation={1} >
+              <Typography>Qty: { cartItem.quantity }</Typography>
+              <Typography >Subtotal: ${ newSubtotal }</Typography>
+            </Details>
+          </InfoDetails>
         </Info>
         <ItemAccordionDetails>
           <Typography variant="h6">Change quantity:</Typography>
@@ -33,6 +37,7 @@ const CartItem = ({ cartItem, onDeleteItem, onQuantityChange }) => {
             onChange={ (e) => onQuantityChange(e, cartItem.id) }
           >
           </Qty>
+          <Typography variant="h6">Unit Price: ${cartItem.unit_price}</Typography>
         </ItemAccordionDetails>
       </ItemAccordion>
     </ListItem>
@@ -43,32 +48,38 @@ export default CartItem
 
 const ItemAccordion = styled(Accordion)({
   width: '100%',
-  padding: '0 10px'
+  padding: '0 10px',
+  display: 'flex',
+  flexDirection: 'column',
 })
 
 const Info = styled(AccordionSummary)({
-  display: 'flex',
-  width: '100%',
-  justifyContent: 'space-between',
-  alignItems: 'center',
   padding: '5px',
-  color: '#777'
+  color: '#777',
+  width: '100%',
 })
 
-const ItemAccordionDetails = styled(AccordionDetails)({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  background: '#EEF'
+const InfoDetails = styled(Paper)({
+  display: 'inherit',
+  justifyContent: 'space-between',
+  width: '100%',
 })
 
 const Details = styled(Paper)({
   display: 'inherit',
   flexDirection: 'row',
-  width: '30%',
+  width: '40%',
+  padding: '5px',
   justifyContent: 'space-between',
   color: '#777',
   margin: '0 40px'
+})
+
+const ItemAccordionDetails = styled(AccordionDetails)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: '#EEF'
 })
 
 const Qty = styled(Input)({
@@ -80,4 +91,5 @@ const Qty = styled(Input)({
   textDecoration: 'none',
   fontSize: '24px',
   borderRadius: '5px',
+  background: 'white'
 })

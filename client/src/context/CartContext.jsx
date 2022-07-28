@@ -15,12 +15,14 @@ function CartProvider({ children }) {
     const newCount = cart.map((item) => parseInt(item.quantity)).reduce((p, c) => p + c, 0)
     setItemCount(newCount)
   }, [cart])
-  console.log("Total from CartCONTEXT: ", typeof total)
 
   function loadCart() {
     fetch("/cart_items")
       .then((res) => res.json())
-      .then(setCart)
+      .then((items) => {
+        const sortedItems = items.sort((a,b) => a.id - b.id)
+        setCart(sortedItems)
+      })
   }
 
   const value = [cart, setCart, total, itemCount, loadCart]

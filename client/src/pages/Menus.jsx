@@ -4,20 +4,25 @@ import { Box, Container, styled, Typography } from '@mui/material'
 
 const Menus = ({ currentUser }) => {
   const [menus, setMenus] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    setIsLoading(true)
     fetch("/menus")
       .then((res) => res.json())
-      .then(setMenus)
+      .then((menus) => {
+        setMenus(menus)
+        setIsLoading(false)
+      })
   }, [])
+
+  const menusList = menus.map((menu) => ( <MenuCard menu={menu} key={menu.id} /> ))
 
   return (
     <MenuContainer>
       <Typography variant='h5'>Welcome to the Food Court, {currentUser.username}!</Typography>
       <Typography variant='h4'>Choose a Menu</Typography>
-      <MenuBox>
-        {menus.map((menu) => ( <MenuCard menu={menu} key={menu.id} /> ))}
-      </MenuBox>
+      { isLoading ? <Loading variant="h4">Loading Menus...</Loading> : <MenuBox>{ menusList }</MenuBox> }
     </MenuContainer>
   )
 }
@@ -31,10 +36,16 @@ const MenuContainer = styled(Container)({
   textAlign: 'center'
 })
 
+const Loading = styled(Typography)({
+  margin: '100px 0',
+  color: 'red',
+  fontStyle: 'italic'
+})
+
 const MenuBox = styled(Box)({
   display: 'flex',
   flexWrap: 'wrap',
-  alignContent: 'center',
+  justifyContent: 'center',
   margin: '20px auto',
   width: '100%'
 })

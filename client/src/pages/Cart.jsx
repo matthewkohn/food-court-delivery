@@ -29,8 +29,7 @@ const Cart = ({ currentUser }) => {
 
   const handleOrder = (e) => {
     e.preventDefault()
-    const url = '/orders'
-    fetch(url, {
+    fetch('/orders', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(orderJsonBody),
@@ -112,6 +111,7 @@ const CartContainer = styled(Container)({
   borderRadius: '30px',
   height: '50vh',
   width: '100%',
+  overflow: 'unset',
 })
 
 const EmptyCartText = styled(Typography)({
