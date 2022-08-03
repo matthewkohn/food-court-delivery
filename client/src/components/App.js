@@ -24,7 +24,7 @@ function App() {
       })
   }, [])
 
-  if (!user) return <SignIn onLogin={setUser} />
+  if (!user) return <SignIn onLogin={setUser}/>
 
   return (
     <CartProvider>
@@ -36,6 +36,7 @@ function App() {
           <Route path='/item/:id' element={ <Item />} />
           <Route path='/cart' element={ <Cart currentUser={user} /> } />
           <Route path='/orders' element={ <OrderHistory /> } />
+          <Route path='/' element={ <SignIn onLogin={setUser}/> } />
         </Routes>
       </AppContainer>
     </CartProvider>
