@@ -1,45 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import Navbar from './Navbar'
-import SignIn from '../pages/SignIn'
-import Menus from '../pages/Menus'
-import MenuItems from '../pages/MenuItems'
-import Item from '../pages/Item'
-import Cart from '../pages/Cart'
+import SignIn from './login/SignIn'
+import Menus from './menu/Menus'
+import MenuItems from './menu/MenuItems'
+import Item from './items/Item'
+import Cart from './cart/Cart'
+import OrderHistory from './orders/OrderHistory'
+import { UserContext } from '../context/UserContext'
 import { Routes, Route } from 'react-router-dom'
 import { Container, styled } from '@mui/material'
-import { CartProvider } from '../context/CartContext'
-import OrderHistory from '../pages/OrderHistory'
 
 function App() {
-  const [user, setUser] = useState(null)
+  const { user } = useContext(UserContext)
 
-  useEffect(() => {
-    fetch("/me")
-      .then((res) => {
-        if (res.ok) {
-          res.json().then((user) => setUser(user))
-        } else {
-          console.log("Please log in or create an account")
-        }
-      })
-  }, [])
-
-  if (!user) return <SignIn onLogin={setUser}/>
+  if (!user) return <SignIn />
 
   return (
-    <CartProvider>
-      <AppContainer>
-        <Navbar logout={ setUser } />
-        <Routes>
-          <Route path='/menus' element={ <Menus currentUser={ user } /> } />
-          <Route path='/menus/:id' element={ <MenuItems /> } />
-          <Route path='/item/:id' element={ <Item />} />
-          <Route path='/cart' element={ <Cart currentUser={user} /> } />
-          <Route path='/orders' element={ <OrderHistory /> } />
-          <Route path='/' element={ <SignIn onLogin={setUser}/> } />
-        </Routes>
-      </AppContainer>
-    </CartProvider>
+    <AppContainer>
+      <Navbar />
+      <Routes>
+        <Route path='/menus' element={ <Menus /> } />
+        <Route path='/menus/:id' element={ <MenuItems /> } />
+        <Route path='/item/:id' element={ <Item />} />
+        <Route path='/cart' element={ <Cart /> } />
+        <Route path='/orders' element={ <OrderHistory /> } />
+        <Route path='/' element={ <SignIn /> } />
+      </Routes>
+    </AppContainer>
   );
 }
 

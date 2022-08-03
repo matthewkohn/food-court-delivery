@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import LoginForm from '../components/login/LoginForm'
+import LoginForm from './LoginForm'
+
 import { Box, Button, styled, Typography } from '@mui/material'
 
-const SignIn = ({ onLogin }) => {
-  const [hideSignUp, setHideSignUp] = useState(true);
+const SignIn = () => {
+  const [hideSignUp, setHideSignUp] = useState(true)
 
   return (
     <SignInContainer component='section' >
@@ -15,7 +16,7 @@ const SignIn = ({ onLogin }) => {
         <Title variant='h5'>Sign Up for Free</Title>
       }
 
-      <LoginForm onLogin={onLogin} hideSignUp={hideSignUp} />
+      <LoginForm hideSignUp={hideSignUp} />
 
       { hideSignUp ?
         <Typography variant='caption'>

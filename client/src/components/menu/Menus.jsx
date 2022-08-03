@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import MenuCard from '../components/menu/MenuCard'
+import React, { useContext, useEffect, useState } from 'react'
+import MenuCard from './MenuCard'
+import { UserContext } from '../../context/UserContext'
 import { Box, Container, styled, Typography } from '@mui/material'
 
-const Menus = ({ currentUser }) => {
+const Menus = () => {
   const [menus, setMenus] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
     setIsLoading(true)
@@ -20,7 +22,7 @@ const Menus = ({ currentUser }) => {
 
   return (
     <MenuContainer>
-      <Typography variant='h5'>Welcome to the Food Court, {currentUser.username}!</Typography>
+      <Typography variant='h5'>Welcome to the Food Court, {user.username}!</Typography>
       <Typography variant='h4'>Choose a Menu</Typography>
       { isLoading ? <Loading variant="h4">Loading Menus...</Loading> : <MenuBox>{ menusList }</MenuBox> }
     </MenuContainer>

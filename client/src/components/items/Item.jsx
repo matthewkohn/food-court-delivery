@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { CartContext } from '../context/CartContext'
+import { CartContext } from '../../context/CartContext'
 import { Box, Button, ButtonGroup, Container, FormControlLabel, FormGroup, Input, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { formatDollar } from '../helpers/formatDollar'
+import { formatDollar } from '../../helpers/formatDollar'
 
 
 const Item = () => {

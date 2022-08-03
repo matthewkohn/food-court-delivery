@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
-import CartItem from '../components/cart/CartItem'
-import CartSummary from '../components/cart/CartSummary'
-import { CartContext } from '../context/CartContext'
-import emptyCart from '../helpers/emptyCart'
+import CartItem from './CartItem'
+import CartSummary from './CartSummary'
+import { CartContext } from '../../context/CartContext'
+import emptyCart from '../../helpers/emptyCart'
 import { Container,  List, styled, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { formatDollar } from '../helpers/formatDollar'
+import { formatDollar } from '../../helpers/formatDollar'
+import { UserContext } from '../../context/UserContext'
 
-const Cart = ({ currentUser }) => {
+const Cart = () => {
   const [orderJsonBody, setOrderJsonBody] = useState({})
   const [cart, setCart, total, itemCount, loadCart] = useContext(CartContext)
+  const { user } = useContext(UserContext)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -19,13 +21,13 @@ const Cart = ({ currentUser }) => {
 
   useEffect(() => {
     const order = {
-      user_id: currentUser.id,
+      user_id: user.id,
       total: total,
       item_count: itemCount,
       order_items_attributes: cart
     }
     setOrderJsonBody(order)
-  }, [cart, currentUser, itemCount, total])
+  }, [cart, user, itemCount, total])
 
   const handleOrder = (e) => {
     e.preventDefault()

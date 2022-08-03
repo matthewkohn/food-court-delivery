@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 import { AppBar, IconButton, styled, Typography } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
@@ -6,14 +7,13 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import HistoryIcon from '@mui/icons-material/History';
 import { useNavigate } from 'react-router-dom'
 
-const Navbar = ({ logout }) => {
+const Navbar = () => {
+  const { setUser } = useContext(UserContext)
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    fetch("/logout", {
-      method: "DELETE"
-    })
-    .then(() => logout(null))
+    fetch("/logout", { method: "DELETE" })
+    .then(res => res.ok ? setUser(null) : console.log(res))
     .then(navigate('/'))
   }
 

@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Error from './Error'
+import { UserContext } from '../../context/UserContext'
 import { Box, Button, FormControl, styled, TextField } from '@mui/material'
 import LoginIcon from '@mui/icons-material/Login'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 import { useNavigate } from 'react-router-dom'
 
-const LoginForm = ({ hideSignUp, onLogin }) => {
+const LoginForm = ({ hideSignUp }) => {
   const [userInfo, setUserInfo] = useState({
     username: '',
     password: '',
@@ -14,6 +15,7 @@ const LoginForm = ({ hideSignUp, onLogin }) => {
   })
   const [errors, setErrors] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const { setUser } = useContext(UserContext)
   const navigate = useNavigate()
 
   const handleUserInput = (e) => {
@@ -38,9 +40,9 @@ const LoginForm = ({ hideSignUp, onLogin }) => {
       body: JSON.stringify(userInfo),
     })
     .then((res) => {
-      setIsLoading(false)
       if (res.ok) {
-        res.json().then((data) => onLogin(data))
+        setIsLoading(false)
+        res.json().then((data) => setUser(data))
         .then(navigate('/menus'))
       } else {
         res.json().then((err) => setErrors(err.errors))

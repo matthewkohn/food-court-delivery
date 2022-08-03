@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Order from '../components/orders/Order'
+import Order from './Order'
 import { Container, List, styled, Typography } from '@mui/material'
 
 const OrderHistory = () => {
