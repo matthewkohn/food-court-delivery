@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import Order from './Order'
+import { handleGET } from '../../helpers/fetchRequests'
 import { Container, List, styled, Typography } from '@mui/material'
+import { useContext } from 'react'
+import { UserContext } from '../../context/UserContext'
+
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
     setIsLoading(true)
-    fetch("/orders")
-      .then((res) => res.json())
-      .then((pastOrders) => {
-        setOrders(pastOrders)
-        setIsLoading(false)
-      })
+    handleGET('/orders')
+    .then((pastOrders) => {
+      setOrders(pastOrders)
+      setIsLoading(false)
+    })
   }, [])
 
   const ordersList = orders.map((order) => (
-    <Order key={order.id} order={order} />
+    <Order key={ order.id } order={ order } />
   ))
   
   return (
     <HistoryContainer>
-      <Typography variant="h5">Your Previous Orders:</Typography>
-      { isLoading ? <Loading variant="h4">Preparing your Orders!</Loading> : <OrderList>{ orders.length > 0 ? ordersList : <h1>No Orders Yet.</h1>}</OrderList> }
+      <Typography variant="h5">{ user.username }'s Previous Orders:</Typography>
+      { isLoading ? 
+          <AlertMessage variant="h4">Preparing your Orders!</AlertMessage> 
+        : 
+          <OrderList>
+            { orders.length > 0 ? ordersList : <AlertMessage variant="h5">No Orders Yet.</AlertMessage> }
+          </OrderList> 
+      }
     </HistoryContainer>
   )
 }
@@ -49,7 +59,7 @@ const OrderList = styled(List)({
   width: '100%',
 })
 
-const Loading = styled(Typography)({
+const AlertMessage = styled(Typography)({
   margin: '100px 0',
   color: 'red',
   fontStyle: 'italic'

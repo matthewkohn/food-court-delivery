@@ -1,20 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../context/CartContext'
+import { handleAPI } from '../../helpers/fetchRequests'
+import { formatDollar } from '../../helpers/formatDollar'
 import { Box, Button, ButtonGroup, Container, FormControlLabel, FormGroup, Input, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { formatDollar } from '../../helpers/formatDollar'
 
 
 const Item = () => {
   const [item, setItem] = useState({})
   const [menuName, setMenuName] = useState("")
   const [isAdded, setIsAdded] = useState(false)
-  const [cart, setCart] = useContext(CartContext)
+  const { cart, setCart } = useContext(CartContext)
   const navigate = useNavigate()
   const location = useLocation()
   const currentItem = location.state[0]
   const currentMenu = location.state[1]
-  const findItem = cart.some(i => i.item_id === currentItem.id)
+  const isItemFound = cart.some(i => i.item_id === currentItem.id)
 
   const [cartItem, setCartItem] = useState({
     item_id: currentItem.id,
@@ -27,8 +28,8 @@ const Item = () => {
   useEffect(() => {
     setItem(currentItem)
     setMenuName(currentMenu)
-    setIsAdded(findItem)
-  }, [currentItem, currentMenu, findItem])
+    setIsAdded(isItemFound)
+  }, [currentItem, currentMenu, isItemFound])
 
   const handleQuantity = (e) => {
     const qty = e.target.value
@@ -43,32 +44,25 @@ const Item = () => {
   }
 
   const handleAddToCart = () => {
-    setCart( [ ...cart, cartItem ] )
+    setCart([ ...cart, cartItem ])
     setIsAdded(true)
-    fetch('/cart_items', {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(cartItem),
-    })
-    .then((res) => res.json())
-    .then(() => {console.log("I think it worked")})
-    
+    handleAPI('/cart_items', "POST", cartItem)
   }
 
   return (
     <ItemContainer>
-      <Title variant='h2'>{item.name}</Title>
+      <Title variant='h2'>{ item.name }</Title>
       <ItemBody>
         <Section>
           <Description variant='h6'>
-            {item.description}
+            { item.description }
           </Description>
           <ButtonGroup>
             <ActionBtn
               onClick={ () => navigate(-1) }
               variant='outlined'
             >
-              Back to {menuName}
+              Back to { menuName }
             </ActionBtn>
             <ActionBtn
               onClick={ () => navigate('/menus') }
@@ -86,7 +80,7 @@ const Item = () => {
         </Section>
 
         <Section>
-          <Price variant='h4'>${item.price}</Price>
+          <Price variant='h4'>${ item.price }</Price>
           <FormControlLabel
             label='Quantity: '
             labelPlacement='start'
@@ -94,19 +88,19 @@ const Item = () => {
               <Qty
                 type='number'
                 step='1'
-                disabled={isAdded}
+                disabled={ isAdded }
                 disableUnderline
                 value={cartItem.quantity}
-                onChange={(e) => handleQuantity(e)}
+                onChange={ (e) => handleQuantity(e) }
               />
             }
           />
           <OrderBtn
-            onClick={() => handleAddToCart()}
+            onClick={ () => handleAddToCart() }
             variant='contained'
-            disabled={isAdded}
+            disabled={ isAdded }
           >
-            {isAdded ? "Added to cart!" : "Add To Cart"}
+            { isAdded ? "Added to cart!" : "Add To Cart" }
           </OrderBtn>
         </Section>
       </ItemBody>

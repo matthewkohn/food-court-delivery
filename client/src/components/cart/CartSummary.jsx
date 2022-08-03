@@ -4,6 +4,7 @@ import SendIcon from '@mui/icons-material/Send'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import { useNavigate } from 'react-router-dom'
 
+
 const CartSummary = ({ total }) => {
   const navigate = useNavigate()
 
@@ -11,17 +12,17 @@ const CartSummary = ({ total }) => {
     <Summary>
       <BackToMenusBtn 
         variant="contained" 
-        startIcon={<AddShoppingCartIcon />}
-        onClick={() => navigate('/menus')}
+        startIcon={ <AddShoppingCartIcon /> }
+        onClick={ () => navigate('/menus') }
       >
         Keep Shopping
       </BackToMenusBtn>
-      <Total variant="h5" >Total: ${total}</Total>
+      <Total variant="h5" >Total: ${ total }</Total>
       <SubmitBtn 
         variant="contained" 
         type="submit" 
         form="order-form"
-        endIcon={<SendIcon />}
+        endIcon={ <SendIcon /> }
       >
         Submit Order
       </SubmitBtn>

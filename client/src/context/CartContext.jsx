@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { formatDollar } from "../helpers/formatDollar"
+import { handleGET } from "../helpers/fetchRequests"
 
 const CartContext = React.createContext()
 
@@ -17,15 +18,14 @@ function CartProvider({ children }) {
   }, [cart])
 
   function loadCart() {
-    fetch("/cart_items")
-      .then((res) => res.json())
-      .then((items) => {
-        const sortedItems = items.sort((a,b) => a.id - b.id)
-        setCart(sortedItems)
-      })
+    handleGET('/cart_items')
+    .then((items) => {
+      const sortedItems = items.sort((a,b) => a.id - b.id)
+      setCart(sortedItems)
+    })
   }
 
-  const value = [cart, setCart, total, itemCount, loadCart]
+  const value = { cart, setCart, total, itemCount, loadCart }
 
   return (
     <CartContext.Provider value={ value }>

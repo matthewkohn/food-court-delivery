@@ -2,15 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import CartItem from './CartItem'
 import CartSummary from './CartSummary'
 import { CartContext } from '../../context/CartContext'
-import emptyCart from '../../helpers/emptyCart'
+import { UserContext } from '../../context/UserContext'
+import { handleDELETE, handleAPI } from '../../helpers/fetchRequests'
+import { formatDollar } from '../../helpers/formatDollar'
 import { Container,  List, styled, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { formatDollar } from '../../helpers/formatDollar'
-import { UserContext } from '../../context/UserContext'
+
 
 const Cart = () => {
   const [orderJsonBody, setOrderJsonBody] = useState({})
-  const [cart, setCart, total, itemCount, loadCart] = useContext(CartContext)
+  const { cart, setCart, total, itemCount, loadCart } = useContext(CartContext)
   const { user } = useContext(UserContext)
   const navigate = useNavigate()
 
@@ -31,15 +32,10 @@ const Cart = () => {
 
   const handleOrder = (e) => {
     e.preventDefault()
-    fetch('/orders', {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(orderJsonBody),
-    })
-    .then((res) => res.json())
+    handleAPI('/orders', "POST", orderJsonBody)
     .then(() => {
       setCart([])
-      emptyCart()
+      handleDELETE('/empty_cart')
       navigate('/orders') 
     })
   }
@@ -49,14 +45,9 @@ const Cart = () => {
     if (newQuantity > 0) {
       const updatedCart = cart.map((item) => {
         if (item.id === itemId) {
-          const updatedItemJsonBody = {...item, quantity: newQuantity}
-          fetch(`cart_items/${itemId}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(updatedItemJsonBody),
-          }).then((res) => res.json())
-          .then(console.log)
+          const updatedItemJsonBody = { ...item, quantity: newQuantity }
           const newSubtotal = formatDollar(newQuantity * item.unit_price)
+          handleAPI(`cart_items/${itemId}`, "PATCH", updatedItemJsonBody)
           return { 
             ...item, 
             quantity: newQuantity,
@@ -69,23 +60,18 @@ const Cart = () => {
     }
   }
   
-  const handleDelete = (itemId) => {
+  const handleDeleteItem = (itemId) => {
     const updatedCart = cart.filter((i) => i.id !== itemId)
     setCart(updatedCart)
-    fetch(`/cart_items/${itemId}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    })
-    .then((res) => res.json())
-    .then(console.log)
+    handleDELETE(`/cart_items/${ itemId }`)
   }
 
   const listOfCartItems = cart.map((item) => (
     <CartItem 
-      key={item.item_id} 
-      cartItem={item} 
-      onDeleteItem={handleDelete}
-      onQuantityChange={handleChange}  
+      key={ item.item_id } 
+      cartItem={ item } 
+      onDeleteItem={ handleDeleteItem }
+      onQuantityChange={ handleChange }  
     />
   ))
 

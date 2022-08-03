@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import Navbar from './Navbar'
 import SignIn from './login/SignIn'
+import Navbar from './Navbar'
 import Menus from './menu/Menus'
 import MenuItems from './menu/MenuItems'
 import Item from './items/Item'
@@ -9,6 +9,7 @@ import OrderHistory from './orders/OrderHistory'
 import { UserContext } from '../context/UserContext'
 import { Routes, Route } from 'react-router-dom'
 import { Container, styled } from '@mui/material'
+
 
 function App() {
   const { user } = useContext(UserContext)

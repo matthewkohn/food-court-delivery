@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Error from './Error'
 import { UserContext } from '../../context/UserContext'
+import { handleAPI } from '../../helpers/fetchRequests'
 import { Box, Button, FormControl, styled, TextField } from '@mui/material'
 import LoginIcon from '@mui/icons-material/Login'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
@@ -31,23 +32,13 @@ const LoginForm = ({ hideSignUp }) => {
     setIsLoading(true)
     let url = ""
     hideSignUp ? url = "/login" : url = "/signup"
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(userInfo),
+    handleAPI(url, "POST", userInfo)
+    .then((newUser) => {
+      setIsLoading(false)
+      setUser(newUser)
     })
-    .then((res) => {
-      if (res.ok) {
-        setIsLoading(false)
-        res.json().then((data) => setUser(data))
-        .then(navigate('/menus'))
-      } else {
-        res.json().then((err) => setErrors(err.errors))
-      }
-    })
+    .then(navigate('/menus'))
+    .catch((err) => setErrors(err.errors))
   }
 
   return (

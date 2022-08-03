@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
+import { CartContext } from '../context/CartContext'
+import { handleDELETE } from '../helpers/fetchRequests'
 import { AppBar, IconButton, styled, Typography } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
@@ -7,47 +9,36 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import HistoryIcon from '@mui/icons-material/History';
 import { useNavigate } from 'react-router-dom'
 
+
 const Navbar = () => {
   const { setUser } = useContext(UserContext)
+  const { setCart } = useContext(CartContext)
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    fetch("/logout", { method: "DELETE" })
-    .then(res => res.ok ? setUser(null) : console.log(res))
+    handleDELETE('/logout')
+    .then(() => {
+      setUser(null)
+      setCart([])
+    })
     .then(navigate('/'))
   }
 
   return (
     <Banner>
       <Header variant='h3' component='div'>Food Court Delivery</Header>
-    
-      <ButtonWrapper
-        size='large'
-        onClick={ () => navigate('/menus') }
-      >
+      <Btn onClick={ () => navigate('/menus') } >
         <MenuBookIcon />
-      </ButtonWrapper>
-
-      <ButtonWrapper
-        size='large'
-        onClick={ () => navigate('/orders') }
-      >
+      </Btn>
+      <Btn onClick={ () => navigate('/orders') } >
         <HistoryIcon />
-      </ButtonWrapper>
-
-      <ButtonWrapper
-        size='large'
-        onClick={ () => navigate('/cart') }
-      >
+      </Btn>
+      <Btn onClick={ () => navigate('/cart') } >
         <ShoppingCartIcon />
-      </ButtonWrapper>
-
-      <ButtonWrapper
-          size='large'
-          onClick={ () => handleLogout() }
-      >
+      </Btn>
+      <Btn onClick={ () => handleLogout() } >
         <LogoutIcon />
-      </ButtonWrapper>
+      </Btn>
     </Banner>
   )
 }
@@ -67,7 +58,7 @@ const Header = styled(Typography)({
   flexGrow: 1
 })
 
-const ButtonWrapper = styled(IconButton)({
+const Btn = styled(IconButton)({
   color: '#DDC',
   margin: '10px',
   '&:hover': {

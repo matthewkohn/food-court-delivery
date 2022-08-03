@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from 'react'
+import { handleGET } from '../../helpers/fetchRequests'
 import { Box, Button, Card, Container, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
+
 
 const MenuItems = () => {
   const [menuName, setMenuName] = useState("")
   const [items, setItems] = useState([])
   const navigate = useNavigate()
   const location = useLocation()
-  const url = location.pathname
 
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setMenuName(data.name)
-        setItems(data.items)
-      })
-  }, [url])
+    handleGET(location.pathname)
+    .then((menu) => {
+      setMenuName(menu.name)
+      setItems(menu.items)
+    })
+  }, [location])
+
+  const handleClick = (item) => {
+    navigate(
+      `/item/${item.name}`, 
+      { state: [item, menuName] }
+    )
+  }
 
   const itemsList = items.map(item => {
     return (
       <ItemCard 
         key={item.id} 
-        onClick={ () => navigate(`/item/${item.name}`, { state: [item, menuName] }) }>
+        onClick={ () => handleClick(item) }>
         <Detail variant='h5'>{item.name}</Detail>
         <Detail>${item.price}</Detail>
         <Detail>{item.description}</Detail>

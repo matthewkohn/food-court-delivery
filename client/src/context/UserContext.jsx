@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { handleGET } from "../helpers/fetchRequests"
 
 const UserContext = React.createContext()
 
@@ -6,14 +7,7 @@ function UserProvider({ children }) {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    fetch("/me")
-      .then((res) => {
-        if (res.ok) {
-          res.json().then((user) => setUser(user))
-        } else {
-          console.log("Please log in or create an account")
-        }
-      })
+    handleGET('/me').then((user) => setUser(user))
   }, [])
 
   const value = { user, setUser }

@@ -1,6 +1,7 @@
-import { ListItem, Paper, styled, Typography } from '@mui/material'
 import React from 'react'
 import { formatDollar } from '../../helpers/formatDollar'
+import { ListItem, Paper, styled, Typography } from '@mui/material'
+
 
 const Order = ({ order }) => {
   const createdAt = new Date(order.created_at)
@@ -9,8 +10,8 @@ const Order = ({ order }) => {
   return (
     <ListItem>
       <OrderSummary>
-        <Detail variant="body2">Order #{order.id}: placed on: {createdAt.toLocaleString()}</Detail>
-        <Detail variant="body2">{order.item_count} items, total: ${newTotal}</Detail>
+        <Detail variant="body2">Order #{ order.id }: placed on: { createdAt.toLocaleString() }</Detail>
+        <Detail variant="body2">{ order.item_count } items, total: ${ newTotal }</Detail>
       </OrderSummary>
     </ListItem>
   )
