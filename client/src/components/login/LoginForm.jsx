@@ -7,7 +7,8 @@ import LoginIcon from '@mui/icons-material/Login'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 import { useNavigate } from 'react-router-dom'
 
-const LoginForm = ({ hideSignUp }) => {
+
+const LoginForm = ({ showSignUp }) => {
   const [userInfo, setUserInfo] = useState({
     username: '',
     password: '',
@@ -31,78 +32,62 @@ const LoginForm = ({ hideSignUp }) => {
     e.preventDefault()
     setIsLoading(true)
     let url = ""
-    hideSignUp ? url = "/login" : url = "/signup"
+    showSignUp ? url = "/signup" : url = "/login"
     handleAPI(url, "POST", userInfo)
-    .then((newUser) => {
+    .then((res) => {
       setIsLoading(false)
-      setUser(newUser)
+      if (res.ok) {
+        res.json().then((newUser) => setUser(newUser))
+        .then(navigate('/menus'))
+      } else {
+        res.json().then((err) => setErrors(err.errors))
+      }
     })
-    .then(navigate('/menus'))
-    .catch((err) => setErrors(err.errors))
+  }
+
+  const input = (attr, autoFocus, val) => {
+    return (
+      <Credential
+        autoFocus={ autoFocus }
+        required
+        label={ attr }
+        name={ attr }
+        type={ attr }
+        value={ val }
+        onChange={ (e) => handleUserInput(e) } />
+    )
   }
 
   return (
     <FormControl variant="standard" >
       <LoginBox 
         component="form" 
-        onSubmit={(e) => handleLogin(e)} 
+        onSubmit={ (e) => handleLogin(e) } 
         id="login-form"
       >
-        <Credential 
-          autoFocus 
-          required 
-          label="username"
-          name="username"
-          type="username"
-          value={userInfo.username}
-          onChange={(e) => handleUserInput(e)}
-        />
-        <Credential 
-          required 
-          label="password"
-          name="password"
-          type="password"
-          value={userInfo.password}
-          onChange={(e) => handleUserInput(e)}
-        />
-
-        { hideSignUp ?
+        { input("username", true, userInfo.username) }
+        { input("password", false, userInfo.password) }
+        { showSignUp ? 
+          <Credential 
+            required 
+            label="confirm password"
+            name="password_confirmation"
+            type="password"
+            value={ userInfo.password_confirmation }
+            onChange={ (e) => handleUserInput(e) }
+          /> : <></>
+        }
           <SubmitBtn 
             size="large" 
             variant="outline" 
             type="submit" 
             form="login-form"
-            endIcon={<LoginIcon />}
+            endIcon={ showSignUp ? <AppRegistrationIcon /> : <LoginIcon /> }
           >
-            { isLoading ? "LOADING..." : "LOG IN" }
+            { isLoading ? "LOADING..." : showSignUp ? "Let's get started!" : "Log in" }
           </SubmitBtn>
-        :
-          <>
-            <Credential 
-              required 
-              label="confirm password"
-              name="password_confirmation"
-              type="password"
-              value={userInfo.password_confirmation}
-              onChange={(e) => handleUserInput(e)}
-            />
-            <SubmitBtn 
-              size="large" 
-              variant="outline" 
-              type="submit" 
-              form="login-form"
-              endIcon={<AppRegistrationIcon />}
-            >
-                { isLoading ? "Loading..." : "Let's get Started!" }
-            </SubmitBtn>
-          </>
-        }
       </LoginBox>
-
-      {errors.map((err) => (
-        <Error key={err}>{err}</Error>
-      ))}
-
+      { errors.map((err) => <Error key={ err }>{ err }</Error>) }
     </FormControl>
   )
 }

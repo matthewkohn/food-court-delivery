@@ -4,29 +4,29 @@ import LoginForm from './LoginForm'
 import { Box, Button, styled, Typography } from '@mui/material'
 
 const SignIn = () => {
-  const [hideSignUp, setHideSignUp] = useState(true)
+  const [showSignUp, setShowSignUp] = useState(false)
 
   return (
     <SignInContainer component='section' >
       <Logo variant='h3'>Food Court Delivery</Logo>
-      { hideSignUp ? 
-        <Title variant='h5'>Login to Order</Title>
-        :
+      { showSignUp ? 
         <Title variant='h5'>Sign Up for Free</Title>
+        :
+        <Title variant='h5'>Login to Order</Title>
       }
-      <LoginForm hideSignUp={hideSignUp} />
-      { hideSignUp ?
+      <LoginForm showSignUp={showSignUp} />
+      { showSignUp ?
         <Typography variant='caption'>
-          Don't have an account? &nbsp;
-          <ToggleBtn onClick={ () => setHideSignUp(false) } >
-            Sign Up
+          Already have an account? &nbsp;
+          <ToggleBtn onClick={ () => setShowSignUp(false) } >
+            Log In
           </ToggleBtn>
         </Typography>
         :
         <Typography variant='caption'>
-          Already have an account? &nbsp;
-          <ToggleBtn onClick={ () => setHideSignUp(true) } >
-            Log In
+          Don't have an account? &nbsp;
+          <ToggleBtn onClick={ () => setShowSignUp(true) } >
+            Sign Up
           </ToggleBtn>
         </Typography>
       }    

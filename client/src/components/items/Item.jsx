@@ -47,6 +47,8 @@ const Item = () => {
     setCart([ ...cart, cartItem ])
     setIsAdded(true)
     handleAPI('/cart_items', "POST", cartItem)
+    .then((res) => res.json())
+    .catch((err) => console.log("Problem loading cart: ",err))
   }
 
   return (

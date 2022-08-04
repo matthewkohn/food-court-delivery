@@ -33,10 +33,14 @@ const Cart = () => {
   const handleOrder = (e) => {
     e.preventDefault()
     handleAPI('/orders', "POST", orderJsonBody)
-    .then(() => {
-      setCart([])
-      handleDELETE('/empty_cart')
-      navigate('/orders') 
+    .then((res) => {
+      if (res.ok) {
+        setCart([])
+        handleDELETE('/empty_cart')
+        navigate('/orders') 
+      } else {
+        console.log("Can't place order: ", res.statusText)
+      }
     })
   }
 
@@ -81,9 +85,9 @@ const Cart = () => {
       onSubmit={(e) => handleOrder(e)} 
       id="order-form"
     >
-      <Title variant="h4">Order Summary</Title>
+      <Title variant="h4">Order Summary for { user.username }</Title>
       <CartList dense={true}>
-        { cart.length === 0 ? <EmptyCartText>Nothing ordered yet.</EmptyCartText> : listOfCartItems }
+        { cart.length === 0 ? <EmptyCartText>Cart is Empty.</EmptyCartText> : listOfCartItems }
       </CartList>
       <CartSummary total={total} />
     </CartContainer>

@@ -13,12 +13,11 @@ const handleDELETE = (url) => {
 }
 
 const handleAPI = async (url, method, json) => {
-  const res = await fetch(url, {
+  return fetch(url, {
     method: method,
     headers,
     body: JSON.stringify(json)
   })
-  return res.ok ? res.json() : console.log(res)
 }
 
 export { handleGET, handleDELETE, handleAPI }
