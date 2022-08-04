@@ -19,7 +19,7 @@ const RestaurantCard = styled(Card)({
   background: 'forestgreen',
   color: '#DDC',
   margin: '0 30px 30px',
-  padding: '30px',
+  padding: '0 20px',
   borderRadius: '50%',
   width: '200px',
   textAlign: 'center',

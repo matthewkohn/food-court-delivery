@@ -20,19 +20,18 @@ const CartItem = ({ cartItem, onDeleteItem, onQuantityChange }) => {
         <Info expandIcon={ <ExpandMoreIcon /> }>
           <InfoDetails elevation={0} >
             <Typography variant="body1">{ cartItem.item_name } from "{ cartItem.menu_name }"</Typography>
-            <Details elevation={1} >
+            <Details elevation={0} >
               <Typography>Qty: { cartItem.quantity }</Typography>
               <Typography >Subtotal: ${ newSubtotal }</Typography>
             </Details>
           </InfoDetails>
         </Info>
         <ItemAccordionDetails>
-          <Typography variant="h6">Change quantity:</Typography>
+          <Typography variant="h6">Change Quantity</Typography>
           <Qty
             type='number'
             step='1'
             disableUnderline
-            label="Quantity"
             value={ cartItem.quantity }
             onChange={ (e) => onQuantityChange(e, cartItem.id) }
           >
@@ -72,21 +71,22 @@ const Details = styled(Paper)({
   padding: '5px',
   justifyContent: 'space-between',
   color: '#777',
-  margin: '0 40px'
 })
 
 const ItemAccordionDetails = styled(AccordionDetails)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  background: '#EEF'
+  background: '#EEF',
+  padding: '0 30px',
+
 })
 
 const Qty = styled(Input)({
   width: '100px',
   height: '30px',
   padding: '15px',
-  margin: '10px',
+  margin: '10px 50px 10px 7px',
   textAlign: 'right',
   textDecoration: 'none',
   fontSize: '24px',

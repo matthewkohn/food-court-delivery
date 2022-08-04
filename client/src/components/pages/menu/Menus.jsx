@@ -25,8 +25,8 @@ const Menus = () => {
 
   return (
     <MenuContainer>
-      <Typography variant='h5'>Welcome to the Food Court, { user.username }!</Typography>
-      <Typography variant='h4'>Choose a Menu</Typography>
+      <Typography variant='h4'>Welcome to the Food Court, { user.username }!</Typography>
+      <Typography variant='h5'>Choose a Menu</Typography>
       { isLoading ? 
           <LoadingMessage message="Loading Menus..." />
         : 
@@ -49,6 +49,8 @@ const MenuBox = styled(Box)({
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'center',
+  alignItems: 'space-around',
   margin: '20px auto',
-  width: '100%'
+  width: '100%',
+  height: '70vh',
 })
