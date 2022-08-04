@@ -37,7 +37,7 @@ const CartItem = ({ cartItem, onDeleteItem, onQuantityChange }) => {
             onChange={ (e) => onQuantityChange(e, cartItem.id) }
           >
           </Qty>
-          <Typography variant="h6">Unit Price: ${cartItem.unit_price}</Typography>
+          <Typography variant="h6">Unit Price: ${ cartItem.unit_price }</Typography>
         </ItemAccordionDetails>
       </ItemAccordion>
     </ListItem>

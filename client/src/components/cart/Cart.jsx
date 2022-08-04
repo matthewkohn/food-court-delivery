@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
   const [orderJsonBody, setOrderJsonBody] = useState({})
+  const [deleteMessage, setDeleteMessage] = useState("")
   const { cart, setCart, total, itemCount, loadCart } = useContext(CartContext)
   const { user } = useContext(UserContext)
   const navigate = useNavigate()
@@ -68,6 +69,13 @@ const Cart = () => {
     const updatedCart = cart.filter((i) => i.id !== itemId)
     setCart(updatedCart)
     handleDELETE(`/cart_items/${ itemId }`)
+    .then((res) => {
+      if (res.ok) {
+        res.json().then((message) => setDeleteMessage(message.error))
+      } else {
+        res.json().then((err) => setDeleteMessage(err.statusText))
+      }
+    })
   }
 
   const listOfCartItems = cart.map((item) => (
@@ -90,6 +98,7 @@ const Cart = () => {
         { cart.length === 0 ? <EmptyCartText>Cart is Empty.</EmptyCartText> : listOfCartItems }
       </CartList>
       <CartSummary total={total} />
+      { deleteMessage !== "" ? <Message variant="h6">{ deleteMessage }</Message> : null }
     </CartContainer>
   )
 }
@@ -123,4 +132,11 @@ const CartList = styled(List)({
 const Title = styled(Typography)({
   textAlign: 'center',
   margin: '15px 0 0'
+})
+
+const Message = styled(Typography)({
+  textAlign: 'center',
+  color: '#F55',
+  fontStyle: 'italic',
+  opacity: '0.5'
 })
