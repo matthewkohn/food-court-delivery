@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { CartContext } from '../../context/CartContext'
-import { handleAPI } from '../../helpers/fetchRequests'
-import { formatDollar } from '../../helpers/formatDollar'
+import { CartContext } from '../../../context/CartContext'
+import { handleAPI } from '../../../helpers/fetchRequests'
+import { formatDollar } from '../../../helpers/formatDollar'
 import { Box, Button, ButtonGroup, Container, FormControlLabel, FormGroup, Input, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 

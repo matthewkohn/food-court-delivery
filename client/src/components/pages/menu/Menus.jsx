@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import MenuCard from './MenuCard'
-import { UserContext } from '../../context/UserContext'
-import { handleGET } from '../../helpers/fetchRequests'
+import LoadingMessage from '../../messages/LoadingMessage'
+import { UserContext } from '../../../context/UserContext'
+import { LoadingContext } from '../../../context/LoadingContext'
+import { handleGET } from '../../../helpers/fetchRequests'
 import { Box, Container, styled, Typography } from '@mui/material'
 
 
 const Menus = () => {
   const [menus, setMenus] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const { isLoading, setIsLoading } = useContext(LoadingContext)
   const { user } = useContext(UserContext)
 
   useEffect(() => {
@@ -17,7 +19,7 @@ const Menus = () => {
       setMenus(newMenus)
       setIsLoading(false)
     })
-  }, [])
+  }, [setIsLoading])
 
   const menusList = menus.map((menu) => ( <MenuCard menu={ menu } key={ menu.id } /> ))
 
@@ -26,7 +28,7 @@ const Menus = () => {
       <Typography variant='h5'>Welcome to the Food Court, { user.username }!</Typography>
       <Typography variant='h4'>Choose a Menu</Typography>
       { isLoading ? 
-          <Loading variant="h4">Loading Menus...</Loading> 
+          <LoadingMessage message="Loading Menus..." />
         : 
           <MenuBox>{ menusList }</MenuBox> 
       }
@@ -41,12 +43,6 @@ const MenuContainer = styled(Container)({
   padding: '80px',
   margin: '5px auto',
   textAlign: 'center'
-})
-
-const Loading = styled(Typography)({
-  margin: '100px 0',
-  color: 'red',
-  fontStyle: 'italic'
 })
 
 const MenuBox = styled(Box)({

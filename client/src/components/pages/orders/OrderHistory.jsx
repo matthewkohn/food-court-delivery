@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Order from './Order'
-import { handleGET } from '../../helpers/fetchRequests'
+import LoadingMessage from '../../messages/LoadingMessage'
+import { UserContext } from '../../../context/UserContext'
+import { LoadingContext } from '../../../context/LoadingContext'
+import { handleGET } from '../../../helpers/fetchRequests'
 import { Container, List, styled, Typography } from '@mui/material'
-import { useContext } from 'react'
-import { UserContext } from '../../context/UserContext'
 
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const { isLoading, setIsLoading } = useContext(LoadingContext)
   const { user } = useContext(UserContext)
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const OrderHistory = () => {
       setOrders(pastOrders)
       setIsLoading(false)
     })
-  }, [])
+  }, [setIsLoading])
 
   const ordersList = orders.map((order) => (
     <Order key={ order.id } order={ order } />
@@ -28,10 +29,10 @@ const OrderHistory = () => {
     <HistoryContainer>
       <Typography variant="h5">{ user.username }'s Previous Orders:</Typography>
       { isLoading ? 
-          <AlertMessage variant="h4">Preparing your Orders!</AlertMessage> 
+          <LoadingMessage message="Preparing your orders!" />
         : 
           <OrderList>
-            { orders.length > 0 ? ordersList : <AlertMessage variant="h5">No Orders Yet.</AlertMessage> }
+            { orders.length > 0 ? ordersList : <LoadingMessage message="No orders yet." /> }
           </OrderList> 
       }
     </HistoryContainer>
@@ -53,14 +54,7 @@ const HistoryContainer = styled(Container)({
 })
 
 const OrderList = styled(List)({
-  // border: '1px solid red',
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-})
-
-const AlertMessage = styled(Typography)({
-  margin: '100px 0',
-  color: 'red',
-  fontStyle: 'italic'
 })

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { handleGET } from '../../helpers/fetchRequests'
+import { handleGET } from '../../../helpers/fetchRequests'
 import { Box, Button, Card, Container, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 

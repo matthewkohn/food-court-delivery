@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CartItem from './CartItem'
 import CartSummary from './CartSummary'
-import { CartContext } from '../../context/CartContext'
-import { UserContext } from '../../context/UserContext'
-import { handleDELETE, handleAPI } from '../../helpers/fetchRequests'
-import { formatDollar } from '../../helpers/formatDollar'
+import { CartContext } from '../../../context/CartContext'
+import { UserContext } from '../../../context/UserContext'
+import { handleDELETE, handleAPI } from '../../../helpers/fetchRequests'
+import { formatDollar } from '../../../helpers/formatDollar'
 import { Container,  List, styled, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,6 +14,7 @@ const Cart = () => {
   const [deleteMessage, setDeleteMessage] = useState("")
   const { cart, setCart, total, itemCount, loadCart } = useContext(CartContext)
   const { user } = useContext(UserContext)
+  
   const navigate = useNavigate()
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatDollar } from '../../helpers/formatDollar';
+import { formatDollar } from '../../../helpers/formatDollar';
 import { Accordion, AccordionSummary, AccordionDetails, IconButton, Input, ListItem, Paper, styled, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
