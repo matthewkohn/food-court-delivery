@@ -7,6 +7,7 @@ import { handleDELETE, handleAPI } from '../../../helpers/fetchRequests'
 import { formatDollar } from '../../../helpers/formatDollar'
 import { Container,  List, styled, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import LoadingMessage from '../../messages/LoadingMessage'
 
 
 const Cart = () => {
@@ -94,9 +95,9 @@ const Cart = () => {
       onSubmit={(e) => handleOrder(e)} 
       id="order-form"
     >
-      <Title variant="h4">Order Summary for { user.username }</Title>
+      <Title variant="h4">Cart Summary for { user.username }</Title>
       <CartList dense={true}>
-        { cart.length === 0 ? <EmptyCartText>Cart is Empty.</EmptyCartText> : listOfCartItems }
+        { cart.length === 0 ? <LoadingMessage message="Cart is Empty." /> : listOfCartItems }
       </CartList>
       <CartSummary total={total} />
       { deleteMessage !== "" ? <Message variant="h6">{ deleteMessage }</Message> : null }
@@ -116,13 +117,13 @@ const CartContainer = styled(Container)({
   overflow: 'unset',
 })
 
-const EmptyCartText = styled(Typography)({
-  textAlign: 'center',
-  color: 'red',
-  margin: '10vh auto',
-  fontStyle: 'italic',
-  opacity: '0.5',
-})
+// const EmptyCartText = styled(Typography)({
+//   textAlign: 'center',
+//   color: 'red',
+//   margin: '10vh auto',
+//   fontStyle: 'italic',
+//   opacity: '0.5',
+// })
 
 const CartList = styled(List)({
   margin: '0 100px 60px',
