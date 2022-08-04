@@ -12,8 +12,7 @@ _I created this full stack app to demonstrate my proficiency in Rails and React 
 ## __Table of Contents__
 * [Requirements](#req)
 * [Media](#media)
-* [Relationships](#rel)
-* [JSON](#json)
+* [ActiveRecord Table Relationships](#rel)
 * [License](#license)
 
 ## __Requirements__ <a id="req"></a>
@@ -49,15 +48,15 @@ You can use the following commands to run the application:
 
 -----
 
-### React Component Flowchart
-
-<img src="./public/media/v1.png" alt="react flowchart">
-
------
-
 ### DB Diagram of table relationships
 
 <img src="./public/media/db.png" alt="db diagram" width="500">
+
+-----
+
+### React Component Flowchart
+
+<img src="./public/media/v1.png" alt="react flowchart">
 
 -------
 -------
@@ -68,143 +67,33 @@ You can use the following commands to run the application:
 
 ```has_one :cart```
 
-### Menu
-```has_many :items```
-
-### Item
-```has_many :order_items```
-
-```has_many :cart_items```
-
-```belongs_to :menu```
-
 ### Order
 ```belongs_to :user```
-
-```has_many :order_items```
-
-```has_many :items, through: :order_items```
-
-### OrderItem
-```belongs_to :order```
-
-```belongs_to :item```
 
 ### Cart
 ```belongs_to :user```
 
 ```has_many :cart_items```
 
+```has_many :items, through: :cart_items```
+
 ### CartItem
 ```belongs_to :cart```
 
 ```belongs_to :item```
 
+### Item
+```has_many :order_items```
+
+```belongs_to :menu```
+
+### Menu
+```has_many :items```
+
+
 -------
 -------
-## JSON <a id="json"></a>
-##### [Back to Top](#top)
-### GET ```/users/get_current_user```
-```
-{
-  "id": 1,
-  "username": "Matt"
-}
-```
------
-### GET ```/menus```
-```
-  // Menu components
-{
-  "menus": [
-    {
-      "id": 1,
-      "name": "breakfast"
-    },
-    {
-      "id": 2,
-      "name": "chocolate"
-    }
-    ...
-    ...
-  ]
-}
-```
-_____
-### GET ```/menus/:id```
-```
-// Item components
-{
-  "id": 1,
-  "menu_name": "breakfast",
-  "items": [
-    {
-      "id": 1,
-      "name": "Breakfast Burrito",
-      "price": 12,
-      "description": "Humongous egg & chorizo burrito with guacamole"
-    },
-    {
-      "id": 2,
-      "name": "Pancakes",
-      "price": 10,
-      "description": "Tall stack of flapjacks with butter and maple syrup"
-    }
-    ...
-    ...
-  ]
-}
-```
-------
-### GET ```/orders/:user_id```
-```
-  // Order History
-{
-  "orders": [
-    {
-      "id": 1,
-      "user_id": 1,
-      "created_at": "June 30, 2022",
-      "total": 40,
-      "item_count": 3,
-      "order_items": [
-        {
-          "item_id": 3,
-          "quantity": 1,
-          "subtotal": 10,
-          "unit_price": 10
-        },
-        {
-          "item_id": 3,
-          "quantity": 1,
-          "subtotal": 10,
-          "unit_price": 10
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "user_id": 2,
-      "created_at": "June 17, 2022",
-      "total": 36,
-      "item_count": 1,
-      "order_items": [
-        {
-          "item_id": 3,
-          "quantity": 1,
-          "subtotal": 10,
-          "unit_price": 10
-        }
-      ]
-    }
-    ...
-    ...
-  ]
-}
 
-```
-
-------
 ## License <a id="license"></a>
 [Read the license here](./LICENSE)
 
