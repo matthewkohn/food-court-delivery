@@ -1,6 +1,7 @@
 class CartItemsController < ApplicationController
 
   def index
+    # byebug
     @user = User.find_by(id: session[:user_id])
     @cart_items = CartItem.all.where(cart_id: @user.cart.id)
     render json: @cart_items

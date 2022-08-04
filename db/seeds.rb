@@ -18,9 +18,6 @@ random6 = Menu.create(name: Faker::Restaurant.name)
 random7 = Menu.create(name: Faker::Restaurant.name)
 random8 = Menu.create(name: Faker::Restaurant.name)
 random9 = Menu.create(name: Faker::Restaurant.name)
-random10 = Menu.create(name: Faker::Restaurant.name)
-random11 = Menu.create(name: Faker::Restaurant.name)
-random12 = Menu.create(name: Faker::Restaurant.name)
 
 36.times do
   Item.create(
@@ -76,21 +73,12 @@ end
   )
 end
 
-5.times do
-  Item.create(
-    name: Faker::Food.dish,
-    description: Faker::Food.description,
-    price: rand(22.01..45.99),
-    menu: random7
-  )
-end
-
 12.times do
   Item.create(
     name: Faker::Coffee.blend_name,
     description: Faker::Coffee.notes,
     price: rand(2.01..9.99),
-    menu: random8
+    menu: random7
   )
 end
 
@@ -99,34 +87,17 @@ end
     name: Faker::Food.ingredient,
     description: Faker::Food.description,
     price: rand(1.99..5.99),
-    menu: random9
+    menu: random8
   )
 end
 
-5.times do
-  Item.create(
-    name: Faker::Food.dish,
-    description: Faker::Food.description,
-    price: rand(8.01..15.99),
-    menu: random10
-  )
-end
-
-7.times do
-  Item.create(
-    name: Faker::Food.dish,
-    description: Faker::Food.description,
-    price: rand(12.01..25.99),
-    menu: random11
-  )
-end
 
 9.times do
   Item.create(
     name: Faker::Food.sushi,
     description: Faker::Food.description,
     price: rand(12.01..25.99),
-    menu: random12
+    menu: random9
   )
 end
 

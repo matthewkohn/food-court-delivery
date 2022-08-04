@@ -19,12 +19,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(
-      :user_id, 
-      :total, 
-      :item_count, 
-      order_items_attributes: [:item_id, :item_name, :menu_name, :quantity, :subtotal, :unit_price] 
-    )
+    params.permit(:user_id, :total, :item_count)
   end
 
 end
