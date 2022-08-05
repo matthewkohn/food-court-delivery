@@ -91,6 +91,29 @@ You can use the following commands to run the application:
 ```has_many :items```
 
 
+------------
+------------
+## Routes
+```
+Prefix        Verb   URI Pattern         Controller#Action
+cart_items    GET    /cart_items         cart_items#index
+              POST   /cart_items         cart_items#create
+cart_item     PATCH  /cart_items/:id     cart_items#update
+              PUT    /cart_items/:id     cart_items#update
+              DELETE /cart_items/:id     cart_items#destroy
+orders        GET    /orders             orders#index
+              POST   /orders             orders#create
+items         GET    /items              items#index
+menus         GET    /menus              menus#index
+menu          GET    /menus/:id          menus#show
+login         POST   /login              sessions#create
+logout        DELETE /logout             sessions#destroy
+signup        POST   /signup             users#create
+me            GET    /me                 users#show
+empty_cart    DELETE /empty_cart         cart_items#empty_cart
+              GET    /*path              fallback#index
+```
+
 -------
 -------
 
