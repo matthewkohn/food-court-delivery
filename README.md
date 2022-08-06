@@ -13,28 +13,31 @@ _I created this full stack app to demonstrate my proficiency in Rails and React 
 * [Requirements](#req)
 * [Media](#media)
 * [ActiveRecord Table Relationships](#rel)
+* [Routes](#routes)
 * [License](#license)
 
 ## __Requirements__ <a id="req"></a>
 
-- Ruby 2.7.4
-- NodeJS (v16), and npm
-- Heroku CLI
-- Postgresql
+- [Ruby v2.7.4](https://www.ruby-lang.org/en/news/2021/07/07/ruby-2-7-4-released/)
+- [npm v8.9.0](https://www.npmjs.com/package/npm/v/8.9.0)
+- [PostgreSQL v14.4](https://www.postgresql.org/docs/current/tutorial-install.html)
 
-To run this project locally, fork and clone this repo and make sure you have the above requirements installed. Then run:
+To run this app locally, fork and clone this repo and make sure you have the above requirements installed. Then install all dependencies and start up your Postgres server:
 
 ```
 bundle install
-rails db:create
 npm install --prefix client
+sudo service postgresql start
+rails db:create db:migrate db:seed
 ```
 
 You can use the following commands to run the application:
 
-- `rails s`: run the backend on [http://localhost:3000](http://localhost:3000)
-- `npm start --prefix client`: run the frontend on
+- `rails s` to run the backend on [http://localhost:3000](http://localhost:3000)
+- In a separate terminal use `npm start --prefix client` to run the frontend on
   [http://localhost:4000](http://localhost:4000)
+
+If you need to run the app on different ports, be sure to update the Proxy in `./client/package.json`, `./config/puma.rb`, and `./Procfile.dev`, and re-install dependencies.
 
 -------
 -------
@@ -93,25 +96,27 @@ You can use the following commands to run the application:
 
 ------------
 ------------
-## Routes
+## __Routes__ <a id="routes"></a>
+##### [Back to Top](#top)
 ```
-Prefix        Verb   URI Pattern         Controller#Action
-cart_items    GET    /cart_items         cart_items#index
-              POST   /cart_items         cart_items#create
-cart_item     PATCH  /cart_items/:id     cart_items#update
-              PUT    /cart_items/:id     cart_items#update
-              DELETE /cart_items/:id     cart_items#destroy
-orders        GET    /orders             orders#index
-              POST   /orders             orders#create
-items         GET    /items              items#index
-menus         GET    /menus              menus#index
-menu          GET    /menus/:id          menus#show
-login         POST   /login              sessions#create
-logout        DELETE /logout             sessions#destroy
-signup        POST   /signup             users#create
-me            GET    /me                 users#show
-empty_cart    DELETE /empty_cart         cart_items#empty_cart
-              GET    /*path              fallback#index
+PREFIX        VERB    URI PATTERN         CONTROLLER#ACTION
+
+cart_items    GET     /cart_items         cart_items#index
+              POST    /cart_items         cart_items#create
+cart_item     PATCH   /cart_items/:id     cart_items#update
+              PUT     /cart_items/:id     cart_items#update
+              DELETE  /cart_items/:id     cart_items#destroy
+orders        GET     /orders             orders#index
+              POST    /orders             orders#create
+items         GET     /items              items#index
+menus         GET     /menus              menus#index
+menu          GET     /menus/:id          menus#show
+login         POST    /login              sessions#create
+logout        DELETE  /logout             sessions#destroy
+signup        POST    /signup             users#create
+me            GET     /me                 users#show
+empty_cart    DELETE  /empty_cart         cart_items#empty_cart
+              GET     /*path              fallback#index
 ```
 
 -------
