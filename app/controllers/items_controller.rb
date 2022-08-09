@@ -5,5 +5,4 @@ class ItemsController < ApplicationController
     render json: items
   end
 
-  
 end

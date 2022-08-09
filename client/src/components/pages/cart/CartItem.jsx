@@ -61,6 +61,7 @@ const Info = styled(AccordionSummary)({
 const InfoDetails = styled(Paper)({
   display: 'inherit',
   justifyContent: 'space-between',
+  alignItems: 'center',
   width: '100%',
 })
 

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../../context/CartContext'
 import { handleAPI } from '../../../helpers/fetchRequests'
-import { formatDollar } from '../../../helpers/formatDollar'
 import { Box, Button, ButtonGroup, Container, FormControlLabel, FormGroup, Input, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -19,10 +18,7 @@ const Item = () => {
 
   const [cartItem, setCartItem] = useState({
     item_id: currentItem.id,
-    quantity: 1,
-    item_name: currentItem.name,
-    menu_name: currentMenu,
-    subtotal: formatDollar(currentItem.price)
+    quantity: 1
   })
 
   useEffect(() => {
@@ -32,14 +28,9 @@ const Item = () => {
   }, [currentItem, currentMenu, isItemFound])
 
   const handleQuantity = (e) => {
-    const qty = e.target.value
+    const qty = parseInt(e.target.value)
     if (qty > 0) {
-      const newSubtotal = formatDollar(item.price * qty)
-      setCartItem({
-        ...cartItem,
-        quantity: qty,
-        subtotal: newSubtotal
-      })
+      setCartItem({ ...cartItem, quantity: qty })
     }
   }
 
@@ -47,13 +38,18 @@ const Item = () => {
     setCart([ ...cart, cartItem ])
     setIsAdded(true)
     handleAPI('/cart_items', "POST", cartItem)
-    .then((res) => res.json())
-    .catch((err) => console.log("Problem loading cart: ",err))
+    .then((res) => {
+      if (res.ok) {
+        res.json()
+      } else {
+        console.log("There was a problem adding this item to your cart. Please choose another item.", res)
+      }
+    })
   }
 
   return (
     <ItemContainer>
-      <Title variant='h2'>{ item.name }</Title>
+      <Title variant='h3'>{ item.name }</Title>
       <ItemBody>
         <Section>
           <Description variant='h6'>

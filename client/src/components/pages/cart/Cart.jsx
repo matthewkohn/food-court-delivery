@@ -27,11 +27,10 @@ const Cart = () => {
     const order = {
       user_id: user.id,
       total: total,
-      item_count: itemCount,
-      order_items_attributes: cart
+      item_count: itemCount
     }
     setOrderJsonBody(order)
-  }, [cart, user, itemCount, total])
+  }, [user, itemCount, total])
 
   const handleOrder = (e) => {
     e.preventDefault()
@@ -48,13 +47,13 @@ const Cart = () => {
   }
 
   const handleChange = (e, itemId) => {
-    const newQuantity = e.target.value
+    const newQuantity = parseInt(e.target.value)
     if (newQuantity > 0) {
       const updatedCart = cart.map((item) => {
         if (item.id === itemId) {
           const updatedItemJsonBody = { ...item, quantity: newQuantity }
-          const newSubtotal = formatDollar(newQuantity * item.unit_price)
           handleAPI(`cart_items/${itemId}`, "PATCH", updatedItemJsonBody)
+          const newSubtotal = formatDollar(newQuantity * item.unit_price)
           return { 
             ...item, 
             quantity: newQuantity,
@@ -116,14 +115,6 @@ const CartContainer = styled(Container)({
   width: '100%',
   overflow: 'unset',
 })
-
-// const EmptyCartText = styled(Typography)({
-//   textAlign: 'center',
-//   color: 'red',
-//   margin: '10vh auto',
-//   fontStyle: 'italic',
-//   opacity: '0.5',
-// })
 
 const CartList = styled(List)({
   margin: '0 100px 60px',
