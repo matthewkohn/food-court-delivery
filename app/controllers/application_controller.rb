@@ -5,6 +5,7 @@ class ApplicationController < ActionController::API
 
   before_action :authorize
 
+  
   private
 
   def authorize
@@ -14,14 +15,6 @@ class ApplicationController < ActionController::API
 
   def render_unprocessable_entity_response(exception)
     render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
-  end
-
-  def find_cart
-    @cart = Cart.find_by(user_id: session[:user_id])
-  end
-
-  def find_cart_item
-    @cart_item = CartItem.find(params[:id])
   end
 
 end

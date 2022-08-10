@@ -1,17 +1,15 @@
 class CartItemsController < ApplicationController
 
   def index
-    @cart_items = CartItem.all.where(cart_id: @current_user.cart.id)
-    render json: @cart_items
+    render json: @current_user.cart.cart_items
   end
 
   def create
-    find_cart
-    @cart_item = CartItem.new(cart_item_params)
-    @cart_item[:cart_id] = @cart.id
-    if @cart_item.valid?
-      @cart_item.save!
-      render json: @cart_item, status: :created
+    @cart = @current_user.cart
+    cart_item = @cart.cart_items.build(cart_item_params)
+    if cart_item.valid?
+      cart_item.save
+      render json: cart_item, status: :created
     else
       render json: { error: "Bad request" }, status: 400
     end
@@ -30,8 +28,7 @@ class CartItemsController < ApplicationController
   end
 
   def empty_cart
-    find_cart
-    @cart.cart_items.destroy_all
+    @current_user.cart.cart_items.destroy_all
     head :no_content
   end
 
@@ -42,5 +39,8 @@ class CartItemsController < ApplicationController
     params.permit(:id, :item_id, :quantity)
   end
 
+  def find_cart_item
+    @cart_item = @current_user.cart.cart_items.find_by(id: params[:id])
+  end
 
 end
