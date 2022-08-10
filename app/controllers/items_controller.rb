@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
   private
 
   def items_params
-    params.permit(:id, :name, :price, :description, :menu_id)
+    params.permit(:id, :name, :price, :description)
   end
 
   def set_current_menu

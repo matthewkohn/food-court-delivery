@@ -1,31 +1,44 @@
 import React, { useEffect, useState } from 'react'
 import { handleGET } from '../../../helpers/fetchRequests'
+import AddItemForm from '../items/AddItemForm'
+import { handleAPI } from '../../../helpers/fetchRequests'
 import { Box, Button, Card, Container, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 
 const MenuItems = () => {
-  // combine menuName + items to one 
-  const [menuName, setMenuName] = useState("")
+  const [menuArr, setMenuArr] = useState([])
   const [items, setItems] = useState([])
   const navigate = useNavigate()
   const location = useLocation()
+  const [newItem, setNewItem] = useState({
+    name: "",
+    price: 0,
+    description: ""
+  })
 
-  // change menuName + items to one object, "menu" that I can pull menu.id, menu.name, and map over menu.items
   useEffect(() => {
     handleGET(location.pathname)
     .then((menu) => {
-      setMenuName(menu.name)
+      setMenuArr(menu)
       setItems(menu.items)
     })
   }, [location])
 
-  // change what you're passing in state: menu
   const handleClick = (item) => {
-    navigate(
-      `/item/${item.name}`, 
-      { state: [item, menuName] }
-    )
+    navigate( `/item/${item.name}`, { state: [item, menuArr] } )
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const url = `/menus/${menuArr.id}/items`
+    handleAPI(url, "POST", newItem)
+    .then(res => res.json())
+    .then((item) => {
+      console.log("item from submit in MenuItem: ", item)
+      console.log("items before appending newItem: ", items)
+      setItems([...items, item])
+    })
   }
 
   const itemsList = items.map(item => {
@@ -39,11 +52,11 @@ const MenuItems = () => {
       </ItemCard>
     )
   })
-// add "AddItemBtn" that triggers a form that allows the user to add an item (name, price, description) and POSTs using menu.id
+
   return (
     <>
       <Header>
-        <Title variant='h3'>{ menuName } Menu</Title>
+        <Title variant='h3'>{ menuArr.name } Menu</Title>
         <Typography>Click an item to add to your cart, or 
           <Button 
             variant='text' 
@@ -56,6 +69,7 @@ const MenuItems = () => {
       </Header>
       <ItemsContainer>
         { itemsList }
+        <AddItemForm newItem={newItem} handleNewItem={setNewItem} onSubmit={handleSubmit} />
       </ItemsContainer>
     </>
   )

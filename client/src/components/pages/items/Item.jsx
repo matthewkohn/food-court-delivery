@@ -12,8 +12,8 @@ const Item = () => {
   const { cart, setCart } = useContext(CartContext)
   const navigate = useNavigate()
   const location = useLocation()
-  const currentItem = location.state[0]
   const currentMenu = location.state[1]
+  const currentItem = location.state[0]
   const isItemFound = cart.some(i => i.item_id === currentItem.id)
 
   const [cartItem, setCartItem] = useState({
@@ -23,7 +23,7 @@ const Item = () => {
 
   useEffect(() => {
     setItem(currentItem)
-    setMenuName(currentMenu)
+    setMenuName(currentMenu.name)
     setIsAdded(isItemFound)
   }, [currentItem, currentMenu, isItemFound])
 
@@ -46,6 +46,7 @@ const Item = () => {
       }
     })
   }
+  console.log("cartItem from ITEM: ", cartItem)
 
   return (
     <ItemContainer>
