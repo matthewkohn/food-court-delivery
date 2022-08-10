@@ -5,11 +5,13 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 
 const MenuItems = () => {
+  // combine menuName + items to one 
   const [menuName, setMenuName] = useState("")
   const [items, setItems] = useState([])
   const navigate = useNavigate()
   const location = useLocation()
 
+  // change menuName + items to one object, "menu" that I can pull menu.id, menu.name, and map over menu.items
   useEffect(() => {
     handleGET(location.pathname)
     .then((menu) => {
@@ -18,6 +20,7 @@ const MenuItems = () => {
     })
   }, [location])
 
+  // change what you're passing in state: menu
   const handleClick = (item) => {
     navigate(
       `/item/${item.name}`, 
@@ -36,7 +39,7 @@ const MenuItems = () => {
       </ItemCard>
     )
   })
-
+// add "AddItemBtn" that triggers a form that allows the user to add an item (name, price, description) and POSTs using menu.id
   return (
     <>
       <Header>

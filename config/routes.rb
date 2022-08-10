@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   
   delete "/empty_cart", to: "cart_items#empty_cart"
 
-  post "/menus/:id/items", to: "items#create"
+  post "/menus/:menu_id/items", to: "items#create"
 
 
   # Routing logic: fallback requests for React Router.

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 const MenuCard = ({ menu }) => {
   const navigate = useNavigate()
+  console.log("menu props passed from Menus to MenuCard: ", menu)
 
   return (
     <RestaurantCard raised onClick={ () => navigate(`/menus/${menu.id}`) } >

@@ -1,11 +1,12 @@
 class CartItemsController < ApplicationController
+  before_action :set_cart, only: [:index, :create, :empty_cart]
+  before_action :set_cart_item, only: [:update, :destroy]
 
   def index
-    render json: @current_user.cart.cart_items
+    render json: @cart.cart_items
   end
 
   def create
-    @cart = @current_user.cart
     cart_item = @cart.cart_items.build(cart_item_params)
     if cart_item.valid?
       cart_item.save
@@ -16,19 +17,17 @@ class CartItemsController < ApplicationController
   end
 
   def update
-    find_cart_item
     @cart_item.update(cart_item_params)
     render json: @cart_item
   end
 
   def destroy
-    find_cart_item
     @cart_item.destroy
     render json: { error: "#{@cart_item[:item_name]} has been removed from your cart."}
   end
 
   def empty_cart
-    @current_user.cart.cart_items.destroy_all
+    @cart.cart_items.destroy_all
     head :no_content
   end
 
@@ -39,8 +38,12 @@ class CartItemsController < ApplicationController
     params.permit(:id, :item_id, :quantity)
   end
 
-  def find_cart_item
+  def set_cart_item
     @cart_item = @current_user.cart.cart_items.find_by(id: params[:id])
+  end
+
+  def set_cart
+    @cart = @current_user.cart
   end
 
 end
