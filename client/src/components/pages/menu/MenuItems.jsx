@@ -35,8 +35,6 @@ const MenuItems = () => {
     handleAPI(url, "POST", newItem)
     .then(res => res.json())
     .then((item) => {
-      console.log("item from submit in MenuItem: ", item)
-      console.log("items before appending newItem: ", items)
       setItems([...items, item])
     })
   }
