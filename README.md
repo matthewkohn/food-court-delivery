@@ -1,9 +1,7 @@
 # _Foodcourt Delivery_ <a id="top"></a>
 
 ## __Description__
-"Foodcourt Delivery" allows the user to create an account and login with an authenticated password.
-
-Once logged in, the user may order food from a wide variety of menus.
+"Foodcourt Delivery" allows the user to explore multiple fictional food menus and order items from any of them. You'll have access to a cart, and the ability to create new items in each menu. Access to these menus is granted with creation of an account, with login and an authenticated password.
 
 _I created this full stack app to demonstrate my proficiency in Rails and React for my Phase 4 project at Flatiron School._
 
