@@ -3,6 +3,7 @@ import { CartContext } from '../../../context/CartContext'
 import { handleAPI } from '../../../helpers/fetchRequests'
 import { Box, Button, ButtonGroup, Container, FormControlLabel, FormGroup, Input, styled, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { actionBtnCss, descriptionCss, itemBodyCss, itemContainerCss, itemTitleCss, orderBtnCss, priceCss, qtyCss, sectionCss } from '../../../styles/itemsCss'
 
 
 const Item = () => {
@@ -111,59 +112,12 @@ const Item = () => {
 export default Item
 
 
-const ItemContainer = styled(Container)({
-  margin: '120px auto',
-  border: '3px solid #DDC',
-  borderRadius: '30px',
-  height: '60vh'
-})
-
-const Title = styled(Typography)({
-  textAlign: 'center',
-  margin: '25px auto'
-})
-
-const ItemBody = styled(Box)({
-  width: '80%',
-  margin: '30px auto',
-  display: 'flex',
-  justifyContent: 'space-between'
-})
-
-const Description = styled(Typography)({
-  padding: '0 50px 0 0',
-  minWidth: '50%'
-})
-
-const Price = styled(Typography)({
-  margin: '0 auto'
-})
-
-const Section = styled(FormGroup)({
-  display: 'inherit',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  height: '250px',
-  margin: '0 15px'
-})
-
-const ActionBtn = styled(Button)({
-  padding: '10px'
-})
-
-const OrderBtn = styled(Button)({
-  padding: '20px',
-  borderRadius: '50%',
-  minWidth: '150px',
-})
-
-const Qty = styled(Input)({
-  width: '100px',
-  height: '30px',
-  padding: '15px',
-  margin: '10px',
-  textAlign: 'right',
-  textDecoration: 'none',
-  fontSize: '24px',
-  borderRadius: '5px',
-})
+const ItemContainer = styled(Container)(itemContainerCss);
+const Title = styled(Typography)(itemTitleCss);
+const ItemBody = styled(Box)(itemBodyCss);
+const Description = styled(Typography)(descriptionCss);
+const Price = styled(Typography)(priceCss);
+const Section = styled(FormGroup)(sectionCss);
+const ActionBtn = styled(Button)(actionBtnCss);
+const OrderBtn = styled(Button)(orderBtnCss);
+const Qty = styled(Input)(qtyCss);

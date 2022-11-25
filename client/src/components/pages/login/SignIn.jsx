@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import LoginForm from './LoginForm'
-
 import { Box, Button, styled, Typography } from '@mui/material'
+import { logoCss, signInContainerCss, titleCss, toggleBtnCss } from '../../../styles/loginCss'
 
 const SignIn = () => {
   const [showSignUp, setShowSignUp] = useState(false)
@@ -36,38 +36,7 @@ const SignIn = () => {
 
 export default SignIn
 
-
-const SignInContainer = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  padding: '20px',
-  textAlign: 'center',
-  color: '#DDC',
-  width: 500,
-  minHeight: 585,
-  borderRadius: '20px',
-  margin: '100px auto',
-  backgroundColor: 'darkgreen',
-  '&:hover': {
-    backgroundColor: 'green',
-    opacity: [0.9, 0.8, 0.7]
-  }
-})
-
-const Logo = styled(Typography)({
-  margin: '20px auto',
-  fontStyle: 'italic',
-  letterSpacing: '2px'
-})
-
-const Title = styled(Typography)({
-  margin: '20px 0 30px'
-})
-
-const ToggleBtn = styled(Button)({
-  color: 'blue',
-  '&:hover': {
-    backgroundColor: 'lightblue'
-  }
-})
+const SignInContainer = styled(Box)(signInContainerCss);
+const Logo = styled(Typography)(logoCss);
+const Title = styled(Typography)(titleCss);
+const ToggleBtn = styled(Button)(toggleBtnCss);

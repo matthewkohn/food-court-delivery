@@ -6,6 +6,7 @@ import { Box, Button, FormControl, styled, TextField } from '@mui/material'
 import LoginIcon from '@mui/icons-material/Login'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 import { useNavigate } from 'react-router-dom'
+import { credentialCss, loginBoxCss, submitBtnCss } from '../../../styles/loginCss'
 
 
 const LoginForm = ({ showSignUp }) => {
@@ -94,25 +95,6 @@ const LoginForm = ({ showSignUp }) => {
 
 export default LoginForm
 
-
-const LoginBox = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column'
-})
-
-const Credential = styled(TextField)({
-  background: '#DDC',
-  borderRadius: '5px',
-  margin: '0 auto 15px'
-})
-
-const SubmitBtn = styled(Button)({
-  color: '#DDC',
-  margin: '23px auto',
-  padding: '20px',
-  border: '1px solid #666',
-  borderRadius: '15px',
-  '&:hover': {
-    backgroundColor: 'blue'
-  }
-})
+const LoginBox = styled(Box)(loginBoxCss);
+const Credential = styled(TextField)(credentialCss);
+const SubmitBtn = styled(Button)(submitBtnCss);

@@ -8,6 +8,7 @@ import { formatDollar } from '../../../helpers/formatDollar'
 import { Container,  List, styled, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import LoadingMessage from '../../messages/LoadingMessage'
+import { cartContainerCss, cartListCss, messageCss, titleCss } from '../../../styles/cartCss'
 
 
 const Cart = () => {
@@ -107,29 +108,7 @@ const Cart = () => {
 export default Cart
 
 
-const CartContainer = styled(Container)({
-  margin: '120px auto',
-  border: '3px solid #DDC',
-  borderRadius: '30px',
-  height: '50vh',
-  width: '100%',
-  overflow: 'unset',
-})
-
-const CartList = styled(List)({
-  margin: '0 100px 60px',
-  height: '35vh',
-  overflow: 'auto',
-})
-
-const Title = styled(Typography)({
-  textAlign: 'center',
-  margin: '15px 0 0'
-})
-
-const Message = styled(Typography)({
-  textAlign: 'center',
-  color: '#F55',
-  fontStyle: 'italic',
-  opacity: '0.5'
-})
+const CartContainer = styled(Container)(cartContainerCss);
+const CartList = styled(List)(cartListCss);
+const Title = styled(Typography)(titleCss);
+const Message = styled(Typography)(messageCss);

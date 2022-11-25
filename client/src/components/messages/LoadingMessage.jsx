@@ -1,5 +1,6 @@
 import React from 'react'
 import { styled, Typography } from '@mui/material'
+import { messageCss } from '../../styles/loginCss'
 
 
 const LoadingMessage = ({ message }) => {
@@ -10,11 +11,4 @@ const LoadingMessage = ({ message }) => {
 
 export default LoadingMessage
 
-
-const Message = styled(Typography)({
-  margin: '100px 0',
-  color: 'red',
-  fontStyle: 'italic',
-  textAlign: 'center'
-})
-
+const Message = styled(Typography)(messageCss);

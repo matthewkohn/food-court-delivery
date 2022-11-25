@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Button, Card, FormControl, styled, TextField, Typography } from '@mui/material'
+import { itemCardCss, itemDataCss, titleCss } from '../../../styles/itemsCss'
 
 
 const AddItemForm = ({ newItem, handleNewItem, onSubmit }) => {
@@ -57,7 +58,7 @@ const AddItemForm = ({ newItem, handleNewItem, onSubmit }) => {
             onChange={ (e) => handleChange(e) } 
           />
         </FormControl>
-        <SubmitBtn variant="contained" type="submit">Submit</SubmitBtn>
+        <Button variant="contained" type="submit">Submit</Button>
 
       </Box>
     </ItemCard>
@@ -67,32 +68,6 @@ const AddItemForm = ({ newItem, handleNewItem, onSubmit }) => {
 export default AddItemForm
 
 
-const ItemCard = styled(Card)({
-  background: '#DDC',
-  display: 'flex',
-  flexDirection: 'column',
-  margin: '10px',
-  padding: '20px',
-  width: '200px',
-  borderRadius: '15px',
-  '&:hover': {
-    backgroundColor: 'blue',
-    color: '#DDC'
-  }
-})
-
-const Title = styled(Typography)({
-  fontStyle: 'italic',
-  fontWeight: '900',
-  margin: '0 0 10px',
-  textAlign: 'center'
-})
-
-const ItemData = styled(TextField)({
-  margin: '10px',
-
-})
-
-const SubmitBtn = styled(Button)({
-
-})
+const ItemCard = styled(Card)(itemCardCss);
+const Title = styled(Typography)(titleCss);
+const ItemData = styled(TextField)(itemDataCss);
