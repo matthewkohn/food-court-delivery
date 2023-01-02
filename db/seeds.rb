@@ -32,7 +32,7 @@ end
   Item.create(
     name: Faker::Food.dish,
     description: Faker::Food.description,
-    price: rand(9.01..15.99),
+    price: rand(9.01..15.99) + 0.01,
     menu: random2
   )
 end
@@ -41,7 +41,7 @@ end
   Item.create(
     name: Faker::Food.dish,
     description: Faker::Food.description,
-    price: rand(9.01..12.99),
+    price: rand(9.01..12.99) + 0.01,
     menu: random3
   )
 end
@@ -50,7 +50,7 @@ end
   Item.create(
     name: Faker::Food.dish,
     description: Faker::Food.description,
-    price: rand(5.01..15.99),
+    price: rand(5.01..15.99) + 0.01,
     menu: random4
   )
 end
@@ -59,7 +59,7 @@ end
   Item.create(
     name: Faker::Dessert.variety,
     description: "Served with #{Faker::Dessert.topping}",
-    price: rand(4.90..10.01),
+    price: rand(4.90..10.01) + 0.01,
     menu: random5
   )
 end
@@ -68,7 +68,7 @@ end
   Item.create(
     name: Faker::Food.dish,
     description: Faker::Food.description,
-    price: rand(12.01..25.99),
+    price: rand(12.01..25.99) + 0.01,
     menu: random6
   )
 end
@@ -77,7 +77,7 @@ end
   Item.create(
     name: Faker::Coffee.blend_name,
     description: Faker::Coffee.notes,
-    price: rand(2.01..9.99),
+    price: rand(2.01..9.99) + 0.01,
     menu: random7
   )
 end
@@ -86,7 +86,7 @@ end
   Item.create(
     name: Faker::Food.ingredient,
     description: Faker::Food.description,
-    price: rand(1.99..5.99),
+    price: rand(1.99..5.99) + 0.01,
     menu: random8
   )
 end
@@ -96,7 +96,7 @@ end
   Item.create(
     name: Faker::Food.sushi,
     description: Faker::Food.description,
-    price: rand(12.01..25.99),
+    price: rand(12.01..25.99) + 0.01,
     menu: random9
   )
 end

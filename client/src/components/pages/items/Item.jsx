@@ -47,7 +47,6 @@ const Item = () => {
       }
     })
   }
-  // console.log("cartItem from ITEM: ", cartItem)
 
   return (
     <ItemContainer>

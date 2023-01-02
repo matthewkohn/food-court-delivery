@@ -23,10 +23,13 @@ const MenuItems = () => {
       setMenuArr(menu)
       setItems(menu.items)
     })
+    // eslint-disable-next-line
   }, [location])
 
   const handleClick = (item) => {
     navigate( `/item/${item.name}`, { state: [item, menuArr] } )
+    console.log("Item: ", item)
+    console.log("MenuArr: ", menuArr)
   }
 
   const handleSubmit = (e) => {
