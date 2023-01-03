@@ -43,7 +43,7 @@ If you need to run the app on different ports, be sure to update the Proxy in `.
 ##### [Back to Top](#top)
 
 ### Youtube Video Demo
-[Check out the video demo here](https://youtu.be/y9ZBeHlyToM)
+[Check out the video demo here](https://youtu.be/fko4hY4AE2c)
 
 <img src="./public/media/PhotoGIF_7_28_2022_5_20_01_PM.gif" alt="Foodcourt Delivery Gif">
 
